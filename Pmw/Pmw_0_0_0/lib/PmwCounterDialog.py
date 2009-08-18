@@ -32,7 +32,7 @@ class CounterDialog(Pmw.Dialog):
         self._cdCounter.pack(fill='x', expand=1,
                 padx = self['borderx'], pady = self['bordery'])
         
-        if not kw.has_key('activatecommand'):
+        if 'activatecommand' not in kw:
             # Whenever this dialog is activated, set the focus to the
             # Counter's entry widget.
             tkentry = self.component('entry')

@@ -103,13 +103,13 @@ class MenuBar(Pmw.MegaWidget):
             raise ValueError, 'menu "%s" already exists' % menuName
 
         menukw = {}
-        if kw.has_key('tearoff'):
+        if 'tearoff' in kw:
             menukw['tearoff'] = kw['tearoff']
             del kw['tearoff']
         else:
             menukw['tearoff'] = 0
 
-        if not kw.has_key(textKey):
+        if textKey not in kw:
             kw[textKey] = menuName
 
         self._addHotkeyToOptions(parentMenuName, kw, textKey, traverseSpec)
@@ -172,8 +172,8 @@ class MenuBar(Pmw.MegaWidget):
 
     def _addHotkeyToOptions(self, menuName, kw, textKey, traverseSpec):
 
-        if (not self['hotkeys'] or kw.has_key('underline') or
-                not kw.has_key(textKey)):
+        if (not self['hotkeys'] or 'underline' in kw or
+                textKey not in kw):
             return
 
         if type(traverseSpec) == types.IntType:

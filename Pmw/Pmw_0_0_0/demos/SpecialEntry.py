@@ -25,7 +25,7 @@ class SpecialEntry(Pmw.EntryField):
 	val = self['validate']
 	if type(val) == types.DictionaryType:
 	    val = val['validator']
-	if _converters.has_key(val):
+	if val in _converters:
 	    text = _converters[val](text, output = 0)
 	Pmw.EntryField.setentry(self, text)
 
@@ -34,7 +34,7 @@ class SpecialEntry(Pmw.EntryField):
 	val = self['validate']
 	if type(val) == types.DictionaryType:
 	    val = val['validator']
-	if _converters.has_key(val):
+	if val in _converters:
 	    return _converters[val](text, output = 1)
 	else:
 	    return text

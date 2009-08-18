@@ -94,16 +94,16 @@ class MainMenuBar(Pmw.MegaArchetype):
             raise ValueError, 'menu "%s" already exists' % menuName
 
         menukw = {}
-        if kw.has_key('tearoff'):
+        if 'tearoff' in kw:
             menukw['tearoff'] = kw['tearoff']
             del kw['tearoff']
         else:
             menukw['tearoff'] = 0
-        if kw.has_key('name'):
+        if 'name' in kw:
             menukw['name'] = kw['name']
             del kw['name']
 
-        if not kw.has_key('label'):
+        if 'label' not in kw:
             kw['label'] = menuName
 
         self._addHotkeyToOptions(parentMenuName, kw, traverseSpec)
@@ -157,8 +157,8 @@ class MainMenuBar(Pmw.MegaArchetype):
 
     def _addHotkeyToOptions(self, menuName, kw, traverseSpec):
 
-        if (not self['hotkeys'] or kw.has_key('underline') or
-                not kw.has_key('label')):
+        if (not self['hotkeys'] or 'underline' in kw or
+                'label' not in kw):
             return
 
         if type(traverseSpec) == types.IntType:

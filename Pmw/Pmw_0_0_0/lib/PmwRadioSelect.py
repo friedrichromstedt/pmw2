@@ -146,18 +146,18 @@ class RadioSelect(Pmw.MegaWidget):
 
         kw['command'] = \
                 lambda self=self, name=componentName: self.invoke(name)
-        if not kw.has_key('text'):
+        if 'text' not in kw:
             kw['text'] = componentName
 
         if self['buttontype'] == 'radiobutton':
-            if not kw.has_key('anchor'):
+            if 'anchor' not in kw:
                 kw['anchor'] = 'w'
-            if not kw.has_key('variable'):
+            if 'variable' not in kw:
                 kw['variable'] = self.var
-            if not kw.has_key('value'):
+            if 'value' not in kw:
                 kw['value'] = kw['text']
         elif self['buttontype'] == 'checkbutton':
-            if not kw.has_key('anchor'):
+            if 'anchor' not in kw:
                 kw['anchor'] = 'w'
 
         button = self.createcomponent(*(componentName,

@@ -33,25 +33,25 @@ def _font_initialise(root, size=None, fontScheme = None):
         root.option_add('*Text*Font',       textFont,     'userDefault')
 
 def logicalfont(name='Helvetica', sizeIncr = 0, **kw):
-  if not _fontInfo.has_key(name):
+  if name not in _fontInfo:
     raise ValueError, 'font %s does not exist' % name
 
   rtn = []
   for field in _fontFields:
-    if kw.has_key(field):
+    if field in kw:
       logicalValue = kw[field]
-    elif _fontInfo[name].has_key(field):
+    elif field in _fontInfo[name]:
       logicalValue = _fontInfo[name][field]
     else:
       logicalValue = '*'
 
-    if _propertyAliases[name].has_key((field, logicalValue)):
+    if (field, logicalValue) in _propertyAliases[name]:
       realValue = _propertyAliases[name][(field, logicalValue)]
-    elif _propertyAliases[name].has_key((field, None)):
+    elif (field, None) in _propertyAliases[name]:
       realValue = _propertyAliases[name][(field, None)]
-    elif _propertyAliases[None].has_key((field, logicalValue)):
+    elif (field, logicalValue) in _propertyAliases[None]:
       realValue = _propertyAliases[None][(field, logicalValue)]
-    elif _propertyAliases[None].has_key((field, None)):
+    elif (field, None) in _propertyAliases[None]:
       realValue = _propertyAliases[None][(field, None)]
     else:
       realValue = logicalValue

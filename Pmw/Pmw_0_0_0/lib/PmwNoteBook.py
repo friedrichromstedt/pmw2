@@ -121,7 +121,7 @@ class NoteBook(Pmw.MegaArchetype):
         self.initialiseoptions()
 
     def insert(self, pageName, before = 0, **kw):
-        if self._pageAttrs.has_key(pageName):
+        if pageName in self._pageAttrs:
             msg = 'Page "%s" already exists.' % pageName
             raise ValueError, msg
 
@@ -250,7 +250,7 @@ class NoteBook(Pmw.MegaArchetype):
         return list(self._pageNames)
 
     def getcurselection(self):
-        if self._pending.has_key('topPage'):
+        if 'topPage' in self._pending:
             return self._pending['topPage']
         else:
             return self._topPageName
@@ -419,13 +419,13 @@ class NoteBook(Pmw.MegaArchetype):
             self.tabBottom = canvasBorder
         oldTabBottom = self.tabBottom
 
-        if self._pending.has_key('borderColor'):
+        if 'borderColor' in self._pending:
             self._lightBorderColor, self._darkBorderColor = \
                     Pmw.Color.bordercolors(self, self['hull_background'])
 
         # Draw all the tabs.
-        if self._withTabs and (self._pending.has_key('tabs') or
-                self._pending.has_key('size')):
+        if self._withTabs and ('tabs' in self._pending or
+                'size' in self._pending):
             # Find total requested width and maximum requested height
             # of tabs.
             sumTabReqWidth = 0
@@ -499,8 +499,8 @@ class NoteBook(Pmw.MegaArchetype):
 
         # Redraw shadow under tabs so that it appears that tab for old
         # top page is lowered and that tab for new top page is raised.
-        if self._withTabs and (self._pending.has_key('topPage') or
-                self._pending.has_key('tabs') or self._pending.has_key('size')):
+        if self._withTabs and ('topPage' in self._pending or
+                'tabs' in self._pending or 'size' in self._pending):
 
             if self.getcurselection() is None:
                 # No pages, so draw line across top of page area.
@@ -541,7 +541,7 @@ class NoteBook(Pmw.MegaArchetype):
             self.tag_raise(self._pageTop2Border)
 
         # Position the page border shadows.
-        if self._pending.has_key('size') or oldTabBottom != self.tabBottom:
+        if 'size' in self._pending or oldTabBottom != self.tabBottom:
 
             self.coords(self._pageLeftBorder,
                 canvasBorder, self.tabBottom,
@@ -574,7 +574,7 @@ class NoteBook(Pmw.MegaArchetype):
                     )
 
         # Color borders.
-        if self._pending.has_key('borderColor'):
+        if 'borderColor' in self._pending:
             self.itemconfigure('lighttag', fill = self._lightBorderColor)
             self.itemconfigure('darktag', fill = self._darkBorderColor)
 
@@ -601,7 +601,7 @@ class NoteBook(Pmw.MegaArchetype):
         #      page (eg:  initially or when all pages deleted).
         #   3) tab height has changed, due to difference in the height of a tab
         if (newTopPage is not None or \
-                self._pending.has_key('size') and self._topPageName is not None
+                'size' in self._pending and self._topPageName is not None
                 or oldTabBottom != self.tabBottom):
             self.itemconfigure(self._topPageItem,
                 width = hullWidth - 2 * canvasBorder - pageBorder * 2,

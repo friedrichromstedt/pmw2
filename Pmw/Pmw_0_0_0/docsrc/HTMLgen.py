@@ -301,7 +301,7 @@ class Document:
         if resource: execfile(mpath(resource), self.__dict__)
         # Overlay keyword parameter values
         for item in kw.keys():
-            if self.__dict__.has_key(item):
+            if item in self.__dict__:
                 self.__dict__[item] = kw[item]
             else:
                 raise KeyError,\
@@ -509,7 +509,7 @@ class FramesetDocument(Document):
         self.cgi = 0
         self.script = []
         for item in kw.keys():
-            if self.__dict__.has_key(item):
+            if item in self.__dict__:
                 self.__dict__[item] = kw[item]
             else:
                 raise KeyError,\
@@ -636,7 +636,7 @@ class Area:
         self.coords = ''
         self.href = ''
         for item in kw.keys():
-            if self.__dict__.has_key(item):
+            if item in self.__dict__:
                 self.__dict__[item] = kw[item]
             else:
                 raise KeyError, `item`+' not a valid parameter of the Area class.'
@@ -686,7 +686,7 @@ class Frameset:
         self.onUnload = ''
         if contents: self.append(*contents)
         for item in kw.keys():
-            if self.__dict__.has_key(item):
+            if item in self.__dict__:
                 self.__dict__[item] = kw[item]
             else:
                 raise KeyError, `item`+' not a valid parameter of the Frameset class.'
@@ -753,7 +753,7 @@ class Frame:
         self.scrolling = None
         self.noresize = None
         for item in kw.keys():
-            if self.__dict__.has_key(item):
+            if item in self.__dict__:
                 self.__dict__[item] = kw[item]
             else:
                 raise KeyError, `item`+' not a valid parameter of the Frameset class.'
@@ -789,7 +789,7 @@ class Href:
         self.url = url
         self.text = text
         for item in kw.keys():
-            if self.__dict__.has_key(item):
+            if item in self.__dict__:
                 self.__dict__[item] = kw[item]
             else:
                 raise KeyError, `item`+' not a valid parameter for this class.'
@@ -969,7 +969,7 @@ class Paragraph:
         self.contents = []
         if type(text) == StringType: text = escape(text)
         self.contents.append(text)
-        if kw.has_key('align'): self.align = kw['align']
+        if 'align' in kw: self.align = kw['align']
 
     def append(self, text):
         """Adds text (or any object) onto the end of object."""
@@ -1287,7 +1287,7 @@ class Form:
         self.name = None
         self.onSubmit = ''
         for item in kw.keys():
-            if self.__dict__.has_key(item):
+            if item in self.__dict__:
                 self.__dict__[item] = kw[item]
             else:
                 raise KeyError, `item`+' not a valid parameter of the Form class.'
@@ -1360,7 +1360,7 @@ class Input:
         self.onFocus = ''
         self.onSelect = ''
         for item in kw.keys():
-            if self.__dict__.has_key(item):
+            if item in self.__dict__:
                 self.__dict__[item] = kw[item]
             else:
                 raise KeyError, `item`+' not a valid parameter of the Input class.'
@@ -1415,7 +1415,7 @@ class Select(UserList.UserList):
         self.onChange = ''
         self.onFocus = ''
         for item in kw.keys():
-            if self.__dict__.has_key(item):
+            if item in self.__dict__:
                 self.__dict__[item] = kw[item]
             else:
                 raise KeyError, `item`+' not a valid parameter of the Select class.'
@@ -1472,7 +1472,7 @@ class Textarea:
         self.onFocus = ''
         self.onSelect = ''
         for item in kw.keys():
-            if self.__dict__.has_key(item):
+            if item in self.__dict__:
                 self.__dict__[item] = kw[item]
             else:
                 raise KeyError, `item`+' not a valid parameter of the Textarea class.'
@@ -1508,7 +1508,7 @@ class Script:
         self.code = ''
         # Now overlay the keyword arguments from caller
         for k in kw.keys():
-            if self.__dict__.has_key(k):
+            if k in self.__dict__:
                 self.__dict__[k] = kw[k]
             else:
                 print `k`, "isn't a valid parameter for this class."
@@ -1579,7 +1579,7 @@ class Table:
         self.colspan = None
         # Now overlay the keyword arguments from caller
         for k in kw.keys():
-            if self.__dict__.has_key(k):
+            if k in self.__dict__:
                 self.__dict__[k] = kw[k]
             else:
                 print `k`, "isn't a valid parameter for this class."
@@ -1918,7 +1918,7 @@ class Spacer:
         self.height = None
         self.align = None
         for item in kw.keys():
-            if self.__dict__.has_key(item):
+            if item in self.__dict__:
                 self.__dict__[item] = kw[item]
             else:
                 raise KeyError, `item`+' not a valid parameter of the Spacer class.'

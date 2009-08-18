@@ -42,9 +42,9 @@ class Counter(Pmw.MegaWidget):
         # be raised (but not around the label).
         if self['labelpos'] is None:
             frame = interior
-            if not kw.has_key('hull_relief'):
+            if 'hull_relief' not in kw:
                 frame.configure(relief = 'raised')
-            if not kw.has_key('hull_borderwidth'):
+            if 'hull_borderwidth' not in kw:
                 frame.configure(borderwidth = 1)
         else:
             frame = self.createcomponent('frame',
@@ -195,7 +195,7 @@ class Counter(Pmw.MegaWidget):
 
         if type(datatype) is types.DictionaryType:
             self._counterArgs = datatype.copy()
-            if self._counterArgs.has_key('counter'):
+            if 'counter' in self._counterArgs:
                 datatype = self._counterArgs['counter']
                 del self._counterArgs['counter']
             else:
@@ -203,7 +203,7 @@ class Counter(Pmw.MegaWidget):
         else:
             self._counterArgs = {}
 
-        if _counterCommands.has_key(datatype):
+        if datatype in _counterCommands:
             self._counterCommand = _counterCommands[datatype]
         elif callable(datatype):
             self._counterCommand = datatype

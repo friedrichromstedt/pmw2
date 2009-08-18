@@ -99,7 +99,7 @@ class ButtonBox(Pmw.MegaWidget):
     def insert(self, componentName, beforeComponent = 0, **kw):
         if componentName in self.components():
             raise ValueError, 'button "%s" already exists' % componentName
-        if not kw.has_key('text'):
+        if 'text' not in kw:
             kw['text'] = componentName
         kw['default'] = 'normal'
         button = self.createcomponent(*(componentName,

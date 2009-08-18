@@ -204,11 +204,11 @@ def forwardmethods(fromClass, toClass, toPart, exclude = ()):
             del dict[ex]
     # discard dangerous methods supplied by the caller
     for ex in exclude:
-        if dict.has_key(ex):
+        if ex in dict:
             del dict[ex]
     # discard methods already defined in fromClass
     for ex in __methods(fromClass):
-        if dict.has_key(ex):
+        if ex in dict:
             del dict[ex]
 
     for method, func in dict.items():
@@ -457,7 +457,7 @@ class MegaArchetype:
             componentGroup, widgetClass, *widgetArgs, **kw):
         # Create a component (during construction or later).
 
-        if self.__componentInfo.has_key(componentName):
+        if componentName in self.__componentInfo:
             raise ValueError, 'Component "%s" already exists' % componentName
 
         if '_' in componentName:
@@ -511,7 +511,7 @@ class MegaArchetype:
                     kw[rest] = keywords[option][0]
                     keywords[option][1] = 1
 
-        if kw.has_key('pyclass'):
+        if 'pyclass' in kw:
             widgetClass = kw['pyclass']
             del kw['pyclass']
         if widgetClass is None:
@@ -750,7 +750,7 @@ class MegaArchetype:
             remainingComponents = name[(index + 1):]
 
         # Expand component alias
-        if self.__componentAliases.has_key(component):
+        if component in self.__componentAliases:
             component, subComponent = self.__componentAliases[component]
             if subComponent is not None:
                 if remainingComponents is None:
@@ -769,7 +769,7 @@ class MegaArchetype:
         return self._hull
 
     def hulldestroyed(self):
-        return not _hullToMegaWidget.has_key(self._hull)
+        return self._hull not in _hullToMegaWidget
 
     def __str__(self):
         return str(self._hull)
@@ -779,7 +779,7 @@ class MegaArchetype:
 
         # Return the value of an option, for example myWidget['font']. 
 
-        if self._optionInfo.has_key(option):
+        if option in self._optionInfo:
             return self._optionInfo[option][_OPT_VALUE]
         else:
             index = string.find(option, '_')
@@ -788,7 +788,7 @@ class MegaArchetype:
                 componentOption = option[(index + 1):]
 
                 # Expand component alias
-                if self.__componentAliases.has_key(component):
+                if component in self.__componentAliases:
                     component, subComponent = self.__componentAliases[component]
                     if subComponent is not None:
                         componentOption = subComponent + '_' + componentOption
@@ -796,7 +796,7 @@ class MegaArchetype:
                     # Expand option string to write on error
                     option = component + '_' + componentOption
 
-                if self.__componentInfo.has_key(component):
+                if component in self.__componentInfo:
                     # Call cget on the component.
                     componentCget = self.__componentInfo[component][3]
                     return componentCget(componentOption)
@@ -1023,7 +1023,7 @@ class MegaToplevel(MegaArchetype):
 
     def destroy(self):
         # Allow this to be called more than once.
-        if _hullToMegaWidget.has_key(self._hull):
+        if self._hull in _hullToMegaWidget:
             self.deactivate()
 
             # Remove circular references, so that object can get cleaned up.
@@ -1293,7 +1293,7 @@ def hidebusycursor(forceFocusRestore = 0):
 
     for window in busyInfo['newBusyWindows']:
         # If this window has not been deleted, release the busy cursor.
-        if _toplevelBusyInfo.has_key(window):
+        if window in _toplevelBusyInfo:
             winInfo = _toplevelBusyInfo[window]
             winInfo['isBusy'] = 0
             _busy_release(window)
@@ -1352,7 +1352,7 @@ def _addRootToToplevelBusyInfo():
     root = Tkinter._default_root
     if root == None:
         root = Tkinter.Tk()
-    if not _toplevelBusyInfo.has_key(root):
+    if root not in _toplevelBusyInfo:
         _addToplevelBusyInfo(root)
 
 def busycallback(command, updateFunction = None):
@@ -1591,7 +1591,7 @@ def __TkinterToplevelTitle(self, *args):
     # Toplevel in the list of toplevels and set the initial
     # WM_DELETE_WINDOW protocol to destroy() so that we get to know
     # about it.
-    if not _toplevelBusyInfo.has_key(self):
+    if self not in _toplevelBusyInfo:
         _addToplevelBusyInfo(self)
         self._Pmw_WM_DELETE_name = self.register(self.destroy, None, 0)
         self.protocol('WM_DELETE_WINDOW', self._Pmw_WM_DELETE_name)
@@ -1680,7 +1680,7 @@ def drawarrow(canvas, color, direction, tag, baseOffset = 0.25, edgeOffset = 0.1
 _hullToMegaWidget = {}
 
 def __TkinterToplevelDestroy(tkWidget):
-    if _hullToMegaWidget.has_key(tkWidget):
+    if tkWidget in _hullToMegaWidget:
         mega = _hullToMegaWidget[tkWidget]
         try:
             mega.destroy()
@@ -1690,7 +1690,7 @@ def __TkinterToplevelDestroy(tkWidget):
         # Delete the busy info structure for this toplevel (if the
         # window was created before Pmw.initialise() was called, it
         # will not have any.
-        if _toplevelBusyInfo.has_key(tkWidget):
+        if tkWidget in _toplevelBusyInfo:
             del _toplevelBusyInfo[tkWidget]
         if hasattr(tkWidget, '_Pmw_WM_DELETE_name'):
             tkWidget.tk.deletecommand(tkWidget._Pmw_WM_DELETE_name)
@@ -1698,7 +1698,7 @@ def __TkinterToplevelDestroy(tkWidget):
         Tkinter.BaseWidget.destroy(tkWidget)
 
 def __TkinterWidgetDestroy(tkWidget):
-    if _hullToMegaWidget.has_key(tkWidget):
+    if tkWidget in _hullToMegaWidget:
         mega = _hullToMegaWidget[tkWidget]
         try:
             mega.destroy()

@@ -39,7 +39,7 @@ class Balloon(Pmw.MegaToplevel):
         # The default hull configuration options give a black border
         # around the balloon, but avoids a black 'flash' when the
         # balloon is deiconified, before the text appears.
-        if not kw.has_key('hull_background'):
+        if 'hull_background' not in kw:
             self.configure(hull_background = \
                     str(self._label.cget('background')))
 
@@ -104,7 +104,7 @@ class Balloon(Pmw.MegaToplevel):
 
     def unbind(self, widget):
         if hasattr(widget, '_Pmw_BalloonBindIds'):
-            if widget._Pmw_BalloonBindIds.has_key(None):
+            if None in widget._Pmw_BalloonBindIds:
                 (enterId, motionId, leaveId, buttonId, destroyId) = \
                         widget._Pmw_BalloonBindIds[None]
                 # Need to pass in old bindings, so that Tkinter can
@@ -157,7 +157,7 @@ class Balloon(Pmw.MegaToplevel):
 
     def tagunbind(self, widget, tagOrItem):
         if hasattr(widget, '_Pmw_BalloonBindIds'):
-            if widget._Pmw_BalloonBindIds.has_key(tagOrItem):
+            if tagOrItem in widget._Pmw_BalloonBindIds:
                 (enterId, motionId, leaveId, buttonId) = \
                         widget._Pmw_BalloonBindIds[tagOrItem]
                 widget.tag_unbind(tagOrItem, '<Enter>', enterId)

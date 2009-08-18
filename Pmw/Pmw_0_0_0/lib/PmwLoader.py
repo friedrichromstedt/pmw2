@@ -112,7 +112,7 @@ class PmwLoader:
             d = {}
             execfile(os.path.join(lpath,_PMW_DEF), d)
             for k,v in d.items():
-                if dict.has_key(k):
+                if k in dict:
                     if type(v) == types.TupleType:
                         for item in v:
                             modpath = path + '.Pmw' + item

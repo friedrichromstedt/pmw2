@@ -188,7 +188,7 @@ def extractWidgetInfo (fileName, widgetName):
 	    setattr(text, attr, getattr(default_text, attr))
 
     for key in ('options', 'components', 'methods'):
-	if not text.text.has_key(key):
+	if key not in text.text:
 	    text.text[key] = default_text.text[key]
 
     info['text'] = text
@@ -283,7 +283,7 @@ def getPartText(widgetName, part, type):
     # First check if the widget-specific description contains the
     # part.
     textDict = widgetInfo[widgetName]['text'].text[type]
-    if textDict.has_key(part):
+    if part in textDict:
 	return string.strip(textDict[part])
 
     # No text was found specific to the widget, try the base class
@@ -408,7 +408,7 @@ def blue_line():
 # Now that all the information has been extracted, print html document.
 
 def link(name, target=None, style='html'):
-    if widgetInfo.has_key(name):
+    if name in widgetInfo:
 	if target is None:
 	    if style == 'html':
 		return '<a href="' + name + '.html">Pmw.' + name + '</a>'
@@ -477,7 +477,7 @@ def printSection(widgetName, sectionName):
 			' option ' + option + '\n')
 		else:
 		    text = text + optionText
-		if info['text'].text['options'].has_key(option):
+		if option in info['text'].text['options']:
 		    options_with_text.remove(option)
 		if option not in info['text'].no_auto_default:
                     if type(default) == type(()) and len(default) > 0:
@@ -523,7 +523,7 @@ def printSection(widgetName, sectionName):
 		    text = ''
 		else:
 		    text = componentText
-		if info['text'].text['components'].has_key(component):
+		if component in info['text'].text['components']:
 		    components_with_text.remove(component)
 		text = text + ' By default, this component is a ' + \
 			link(cls, style = 'structured') + '.'
@@ -620,7 +620,7 @@ def printSection(widgetName, sectionName):
 		    print text[3:]
 		else:
 		    print text
-	    if info['text'].text['methods'].has_key(method):
+	    if method in info['text'].text['methods']:
 		methods_with_text.remove(method)
 	    print '</dd></dl>'
         print '</dd>'
@@ -869,7 +869,7 @@ def create_module_manual(moduleName):
     for name, function in functionNames:
 	args = getFunctionArgs(function)
 	print '<dt> <strong>Pmw.' + moduleName + '.' + name + '</strong>' + args + '</dt><dd>'
-	if textModule.text['functions'].has_key(name):
+	if name in textModule.text['functions']:
 	    text = textModule.text['functions'][name]
 	    text = StructuredText.gethtml(text)
 	    if text[:3] == '<p>':

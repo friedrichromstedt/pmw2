@@ -105,9 +105,9 @@ class EntryField(Pmw.MegaWidget):
 
         while 1:
             traversedValidators.append(validator)
-            if extraValidators.has_key(validator):
+            if validator in extraValidators:
                 validator = extraValidators[validator][index]
-            elif _standardValidators.has_key(validator):
+            elif validator in _standardValidators:
                 validator = _standardValidators[validator][index]
             else:
                 return validator
@@ -137,7 +137,7 @@ class EntryField(Pmw.MegaWidget):
 
         # Look up validator maps and replace 'stringtovalue' field
         # with the corresponding function.
-        if dict.has_key('stringtovalue'):
+        if 'stringtovalue' in dict:
             stringtovalue = dict['stringtovalue'] 
             strFunction = self._getValidatorFunc(stringtovalue, 1)
             self._checkValidateFunction(
@@ -454,5 +454,5 @@ def _postProcess(event):
 
     # The function specified by the 'command' option may have destroyed
     # the megawidget in a binding earlier in bindtags, so need to check.
-    if _entryCache.has_key(event.widget):
+    if event.widget in _entryCache:
         _entryCache[event.widget]._postProcess()

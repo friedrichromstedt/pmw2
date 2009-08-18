@@ -78,7 +78,7 @@ class _Branching:
         if nodeName == None:
             nodeName = self._nodeName + ".%d" % (len(self._nodeNames) + 1)
         
-	if self._nodeAttrs.has_key(nodeName):
+	if nodeName in self._nodeAttrs:
 	    msg = 'Node "%s" already exists.' % nodeName
 	    raise ValueError, msg
 

@@ -178,7 +178,7 @@ def _helpString(title, argSpecs):
   return rtn
 
 def exists(key):
-    return configDict.has_key(key)
+    return key in configDict
 
 def get(key):
     return configDict[key]

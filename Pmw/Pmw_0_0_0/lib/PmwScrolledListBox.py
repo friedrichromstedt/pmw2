@@ -373,5 +373,5 @@ def _handleEvent(event, eventType):
 
     # A binding earlier in the bindtags list may have destroyed the
     # megawidget, so need to check.
-    if _listboxCache.has_key(event.widget):
+    if event.widget in _listboxCache:
         _listboxCache[event.widget]._handleEvent(event, eventType)

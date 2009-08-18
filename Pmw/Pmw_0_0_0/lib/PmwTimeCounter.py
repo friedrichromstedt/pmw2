@@ -62,9 +62,9 @@ class TimeCounter(Pmw.MegaWidget):
         # be raised (but not around the label).
         if self['labelpos'] is None:
             frame = interior
-            if not kw.has_key('hull_relief'):
+            if 'hull_relief' not in kw:
                 frame.configure(relief = 'raised')
-            if not kw.has_key('hull_borderwidth'):
+            if 'hull_borderwidth' not in kw:
                 frame.configure(borderwidth = 1)
         else:
             frame = self.createcomponent('frame',
