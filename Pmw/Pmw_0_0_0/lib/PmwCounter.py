@@ -205,7 +205,7 @@ class Counter(Pmw.MegaWidget):
 
         if datatype in _counterCommands:
             self._counterCommand = _counterCommands[datatype]
-        elif callable(datatype):
+        elif hasattr(datatype, '__call__'):
             self._counterCommand = datatype
         else:
             validValues = _counterCommands.keys()

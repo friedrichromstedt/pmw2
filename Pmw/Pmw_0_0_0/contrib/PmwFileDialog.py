@@ -223,7 +223,7 @@ class PmwFileDialog(Pmw.Dialog):
 	self.configure(directory=dir,filename=value)
         
 	c=self['command']
-	if callable(c):
+	if hasattr(c, '__call__'):
 	    c()
 
     def newfilename(self):

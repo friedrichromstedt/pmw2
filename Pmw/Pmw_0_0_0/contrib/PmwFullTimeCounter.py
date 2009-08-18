@@ -460,7 +460,7 @@ class FullTimeCounter(Pmw.MegaWidget):
 
     def invoke(self, event = None):
         cmd = self['command']
-        if callable(cmd):
+        if hasattr(cmd, '__call__'):
 	    cmd()
 
     def destroy(self):

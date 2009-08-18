@@ -340,7 +340,7 @@ class ScrolledListBox(Pmw.MegaWidget):
 
             command = self['selectioncommand']
 
-        if callable(command):
+        if hasattr(command, '__call__'):
             command()
 
     # Need to explicitly forward this to override the stupid

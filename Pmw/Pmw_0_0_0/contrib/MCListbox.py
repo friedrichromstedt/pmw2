@@ -640,7 +640,7 @@ class MultiColumnListbox(Pmw.MegaWidget):
         self._cursel = [row]
 
         cmd = self['command']
-        if callable(cmd):
+        if hasattr(cmd, '__call__'):
             cmd()
 
 
@@ -648,13 +648,13 @@ class MultiColumnListbox(Pmw.MegaWidget):
     def _cellframedblclick(self, event):
         #print 'double click cell frame'
         cmd = self['dblclickcommand']
-        if callable(cmd):
+        if hasattr(cmd, '__call__'):
             cmd()
 
     def _celldblclick(self, event):
         #print 'double click cell'
         cmd = self['dblclickcommand']
-        if callable(cmd):
+        if hasattr(cmd, '__call__'):
             cmd()
 
 if __name__ == '__main__':

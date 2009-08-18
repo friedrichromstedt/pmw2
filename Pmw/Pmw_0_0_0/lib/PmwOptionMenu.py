@@ -149,5 +149,5 @@ class OptionMenu(Pmw.MegaWidget):
         self.setvalue(text)
 
         command = self['command']
-        if callable(command):
+        if hasattr(command, '__call__'):
             return command(text)

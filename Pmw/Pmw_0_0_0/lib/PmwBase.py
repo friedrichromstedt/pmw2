@@ -178,7 +178,7 @@ def forwardmethods(fromClass, toClass, toPart, exclude = ()):
     if type(toPart) != types.StringType:
 
         # check that it is something like a function
-        if callable(toPart):
+        if hasattr(toPart, '__call__'):
 
             # If a method is passed, use the function within it
             if hasattr(toPart, 'im_func'):
@@ -1149,7 +1149,7 @@ class MegaToplevel(MegaArchetype):
 
         pushgrab(self._hull, globalMode, self.deactivate)
         command = self['activatecommand']
-        if callable(command):
+        if hasattr(command, '__call__'):
             command()
         self.wait_variable(self._wait)
 
@@ -1167,7 +1167,7 @@ class MegaToplevel(MegaArchetype):
         popgrab(self._hull)
 
         command = self['deactivatecommand']
-        if callable(command):
+        if hasattr(command, '__call__'):
             command()
 
         self.withdraw()
@@ -1356,7 +1356,7 @@ def _addRootToToplevelBusyInfo():
         _addToplevelBusyInfo(root)
 
 def busycallback(command, updateFunction = None):
-    if not callable(command):
+    if not hasattr(command, '__call__'):
         raise ValueError, \
             'cannot register non-command busy callback %s %s' % \
                 (repr(command), type(command))
@@ -1625,7 +1625,7 @@ class _BusyWrapper:
 
         # Call update before hiding the busy windows to clear any
         # events that may have occurred over the busy windows.
-        if callable(self._updateFunction):
+        if hasattr(self._updateFunction, '__call__'):
             self._updateFunction()
 
         hidebusycursor()

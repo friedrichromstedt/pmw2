@@ -433,7 +433,7 @@ class PanedWidget(Pmw.MegaWidget):
 
         # Invoke the callback command
         cmd = self['command']
-        if callable(cmd):
+        if hasattr(cmd, '__call__'):
             cmd(map(lambda x, s = self: s._size[x], self._paneNames))
 
     def _plotHandles(self):

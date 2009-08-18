@@ -200,7 +200,7 @@ class Balloon(Pmw.MegaToplevel):
     def showstatus(self, statusHelp):
         if self['state'] in ('status', 'both'):
             cmd = self['statuscommand']
-            if callable(cmd):
+            if hasattr(cmd, '__call__'):
                 cmd(statusHelp)
 
     def clearstatus(self):

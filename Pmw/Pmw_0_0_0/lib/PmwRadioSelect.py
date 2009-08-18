@@ -209,7 +209,7 @@ class RadioSelect(Pmw.MegaWidget):
         if self._singleSelect:
             self.__setSingleValue(name)
             command = self['command']
-            if callable(command):
+            if hasattr(command, '__call__'):
                 return command(name)
         else:
             # Multiple selections
@@ -230,5 +230,5 @@ class RadioSelect(Pmw.MegaWidget):
                 state = 1
 
             command = self['command']
-            if callable(command):
+            if hasattr(command, '__call__'):
               return command(name, state)

@@ -270,7 +270,7 @@ class ComboBox(Pmw.MegaWidget):
             self._entryfield.setentry(item)
 
         cmd = self['selectioncommand']
-        if callable(cmd):
+        if hasattr(cmd, '__call__'):
             if event is None:
                 # Return result of selectioncommand for invoke() method.
                 return cmd(item)

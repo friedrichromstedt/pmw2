@@ -366,12 +366,12 @@ class TimeCounter(Pmw.MegaWidget):
 
     def _invoke(self, event):
         cmd = self['command']
-        if callable(cmd):
+        if hasattr(cmd, '__call__'):
             cmd()
 
     def invoke(self):
         cmd = self['command']
-        if callable(cmd):
+        if hasattr(cmd, '__call__'):
             return cmd()
 
     def destroy(self):

@@ -169,7 +169,7 @@ class EntryField(Pmw.MegaWidget):
     def _checkValidateFunction(self, function, option, validator):
         # Raise an error if 'function' is not a function or None.
 
-        if function is not None and not callable(function):
+        if function is not None and not hasattr(function, '__call__'):
             extraValidators = self['extravalidators']
             extra = extraValidators.keys()
             extra.sort()
@@ -183,7 +183,7 @@ class EntryField(Pmw.MegaWidget):
 
     def _executeCommand(self, event = None):
         cmd = self['command']
-        if callable(cmd):
+        if hasattr(cmd, '__call__'):
             if event is None:
                 # Return result of command for invoke() method.
                 return cmd()
@@ -214,7 +214,7 @@ class EntryField(Pmw.MegaWidget):
             return valid
 
         cmd = self['modifiedcommand']
-        if callable(cmd) and previousText != self._entryFieldEntry.get():
+        if hasattr(cmd, '__call__') and previousText != self._entryFieldEntry.get():
             cmd()
         return valid
             
@@ -262,7 +262,7 @@ class EntryField(Pmw.MegaWidget):
         if valid == ERROR:
             # The entry is invalid.
             cmd = self['invalidcommand']
-            if callable(cmd):
+            if hasattr(cmd, '__call__'):
                 cmd()
             if self.hulldestroyed():
                 # The invalidcommand destroyed us.

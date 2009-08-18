@@ -292,7 +292,7 @@ class _LeafNode(Pmw.MegaWidget):
             self._labelWidget.configure(label_foreground = self['selectforeground'])
         #self._viewButton.configure(background = self._selectbg)
         cmd = self['selectcommand']
-        if callable(cmd):
+        if hasattr(cmd, '__call__'):
             cmd(self)
 
     def _unhighlight(self):
@@ -302,7 +302,7 @@ class _LeafNode(Pmw.MegaWidget):
             self._labelWidget.configure(label_foreground = self['foreground'])
         #self._viewButton.configure(background = self._bg)
         cmd = self['deselectcommand']
-        if callable(cmd):
+        if hasattr(cmd, '__call__'):
             cmd(self)
 
     def _setlast(self, last):

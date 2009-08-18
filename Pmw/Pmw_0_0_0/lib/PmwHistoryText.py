@@ -64,7 +64,7 @@ class HistoryText(Pmw.ScrolledText):
             # so allow the 'Next' button to go to the entry after this one.
             self._pastIndex = self._currIndex
             nextState = 'normal'
-        if callable(historycommand):
+        if hasattr(historycommand, '__call__'):
             historycommand('normal', nextState)
 
         # Create the new history entry.
@@ -131,7 +131,7 @@ class HistoryText(Pmw.ScrolledText):
                 if self._currIndex == 0:
                     prevstate = 'disabled'
             historycommand = self['historycommand']
-            if callable(historycommand):
+            if hasattr(historycommand, '__call__'):
                 historycommand(prevstate, nextstate)
             currentEntry =  self._list[self._currIndex]
         else:
