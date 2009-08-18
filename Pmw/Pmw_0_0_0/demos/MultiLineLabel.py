@@ -39,7 +39,7 @@ class Demo:
             if cls == Pmw.Counter or cls == Pmw.ComboBox:
                 dict['entryfield_value'] = sticky
                 dict['entry_width'] = 6
-            widget = apply(cls, (frame,), dict)
+            widget = cls(*(frame,), **dict)
             if cls == Pmw.LabeledWidget:
                 f = Tkinter.Button(widget.interior(), text = sticky)
                 f.pack(fill = 'both', expand = 1)

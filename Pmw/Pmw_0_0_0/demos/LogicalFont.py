@@ -66,7 +66,7 @@ class Demo:
 	sel = self.box.curselection()
 	if len(sel) > 0:
 	    args, dict = Demo.fontList[string.atoi(sel[0])]
-	    font = apply(Pmw.logicalfont, args, dict)
+	    font = Pmw.logicalfont(*args, **dict)
             self.target.configure(font = font)
             print font
 

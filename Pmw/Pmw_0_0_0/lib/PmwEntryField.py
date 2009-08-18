@@ -160,9 +160,9 @@ class EntryField(Pmw.MegaWidget):
         self._previousText = None
 
         if type(dict['min']) == types.StringType and strFunction is not None:
-            dict['min'] = apply(strFunction, (dict['min'],), args)
+            dict['min'] = strFunction(*(dict['min'],), **args)
         if type(dict['max']) == types.StringType and strFunction is not None:
-            dict['max'] = apply(strFunction, (dict['max'],), args)
+            dict['max'] = strFunction(*(dict['max'],), **args)
 
         self._checkValidity()
 
@@ -232,7 +232,7 @@ class EntryField(Pmw.MegaWidget):
         args = self._validationArgs
 
         if dict['validator'] is not None:
-            status = apply(dict['validator'], (text,), args)
+            status = dict['validator'](*(text,), **args)
             if status != OK:
                 return status
 
@@ -242,7 +242,7 @@ class EntryField(Pmw.MegaWidget):
             max = dict['max']
             if min is None and max is None:
                 return OK
-            val = apply(dict['stringtovalue'], (text,), args)
+            val = dict['stringtovalue'](*(text,), **args)
             if min is not None and val < min:
                 if dict['minstrict']:
                     return ERROR

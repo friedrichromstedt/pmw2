@@ -107,7 +107,7 @@ class PanedWidget(Pmw.MegaWidget):
         return self._frame[name]
 
     def add(self, name, **kw):
-        return apply(self.insert, (name, len(self._paneNames)), kw)
+        return self.insert(*(name, len(self._paneNames)), **kw)
 
     def delete(self, name):
         deletePos = self._nameToIndex(name)
@@ -351,7 +351,7 @@ class PanedWidget(Pmw.MegaWidget):
             if self._relsize[name] is None:
                 #special case
                 if self._size[name] == 0:
-                    self._size[name] = apply(majorspec, (self._frame[name],))
+                    self._size[name] = majorspec(*(self._frame[name],))
                     self._setrel(name)
             else:
                 self._size[name] = self._absSize(self._relsize[name])
@@ -383,7 +383,7 @@ class PanedWidget(Pmw.MegaWidget):
 
     def _iterate(self, names, proc, n):
         for i in names:
-            n = apply(proc, (i, n))
+            n = proc(*(i, n))
             if n == 0:
                 break
 

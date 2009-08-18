@@ -684,7 +684,7 @@ class Frameset:
         self.frame_warning = 1
         self.onLoad = ''
         self.onUnload = ''
-        if contents: apply(self.append, contents)
+        if contents: self.append(*contents)
         for item in kw.keys():
             if self.__dict__.has_key(item):
                 self.__dict__[item] = kw[item]
@@ -1031,7 +1031,7 @@ class Paragraph:
             # next take the paren slice itself and wrap
             # it in the markup class
             a , b = endpoints[i][0] , endpoints[i][1]
-            output.append( str(apply(classobj,(self.text[a:b],),kw)) )
+            output.append( str(classobj(*(self.text[a:b],), **kw)) )
         # the loop didn't get the last stretch of plain text
         # so this finishes up
         a , b = endpoints[i][1], endpoints[i+1][0] + 1

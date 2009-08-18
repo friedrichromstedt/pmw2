@@ -32,7 +32,7 @@ class Demo:
 		    entryfield_value = items[0])
 	    combo.grid(sticky='nsew', row = count, column = 1)
 
-	apply(Pmw.Color.setscheme, (parent,), defaultPalette)
+	Pmw.Color.setscheme(*(parent,), **defaultPalette)
 	#normalcolor = Pmw.Color.changebrightness(parent, 'red', 0.85)
 	#Pmw.Color.setscheme(parent, normalcolor)
 

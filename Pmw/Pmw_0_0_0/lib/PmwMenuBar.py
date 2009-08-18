@@ -115,9 +115,9 @@ class MenuBar(Pmw.MegaWidget):
         self._addHotkeyToOptions(parentMenuName, kw, textKey, traverseSpec)
 
         if parentMenuName is None:
-            button = apply(self.createcomponent, (menuName + '-button',
+            button = self.createcomponent(*(menuName + '-button',
                     (), 'Button',
-                    Tkinter.Menubutton, (self.interior(),)), kw)
+                    Tkinter.Menubutton, (self.interior(),)), **kw)
             button.pack(side=side, padx = self['padx'])
             balloon = self['balloon']
             if balloon is not None:
@@ -125,12 +125,12 @@ class MenuBar(Pmw.MegaWidget):
             parentMenu = button
         else:
             parentMenu = self.component(parentMenuName + '-menu')
-            apply(parentMenu.add_cascade, (), kw)
+            parentMenu.add_cascade(*(), **kw)
             self._menuInfo[parentMenuName][1].append(statusHelp)
 
-        menu = apply(self.createcomponent, (menuName + '-menu',
+        menu = self.createcomponent(*(menuName + '-menu',
                 (), 'Menu',
-                Tkinter.Menu, (parentMenu,)), menukw)
+                Tkinter.Menu, (parentMenu,)), **menukw)
         if parentMenuName is None:
             button.configure(menu = menu)
         else:
@@ -168,7 +168,7 @@ class MenuBar(Pmw.MegaWidget):
             raise ValueError, 'unknown menuitem type "%s"' % itemType
 
         self._menuInfo[menuName][1].append(statusHelp)
-        apply(command, (), kw)
+        command(*(), **kw)
 
     def _addHotkeyToOptions(self, menuName, kw, textKey, traverseSpec):
 

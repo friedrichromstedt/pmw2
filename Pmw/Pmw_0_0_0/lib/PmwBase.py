@@ -521,7 +521,7 @@ class MegaArchetype:
             # multiple trailing arguments to createcomponent() or as a
             # single tuple argument.
             widgetArgs = widgetArgs[0]
-        widget = apply(widgetClass, widgetArgs, kw)
+        widget = widgetClass(*widgetArgs, **kw)
         componentClass = widget.__class__.__name__
         self.__componentInfo[componentName] = (widget, widget.configure,
                 componentClass, widget.cget, componentGroup)
@@ -729,7 +729,7 @@ class MegaArchetype:
               func()
 
     def __setitem__(self, key, value):
-        apply(self.configure, (), {key: value})
+        self.configure(*(), **{key: value})
 
     #======================================================================
     # Methods used to query the megawidget.
@@ -1517,7 +1517,7 @@ class _TraceTk:
                 (_recursionCounter, '  ' * _recursionCounter, argStr))
         _recursionCounter = _recursionCounter + 1
         try:
-            result = apply(self.tclInterp.call, args, kw)
+            result = self.tclInterp.call(*args, **kw)
         except Tkinter.TclError, errorString:
             _callToTkReturned = 1
             _recursionCounter = _recursionCounter - 1
@@ -1596,7 +1596,7 @@ def __TkinterToplevelTitle(self, *args):
         self._Pmw_WM_DELETE_name = self.register(self.destroy, None, 0)
         self.protocol('WM_DELETE_WINDOW', self._Pmw_WM_DELETE_name)
 
-    return apply(Tkinter.Wm.title, (self,) + args)
+    return Tkinter.Wm.title(*(self,) + args)
 
 _haveBltBusy = None
 def _havebltbusy(window):
@@ -1621,7 +1621,7 @@ class _BusyWrapper:
 
     def callback(self, *args):
         showbusycursor()
-        rtn = apply(self._command, args)
+        rtn = self._command(*args)
 
         # Call update before hiding the busy windows to clear any
         # events that may have occurred over the busy windows.
@@ -1668,7 +1668,7 @@ def drawarrow(canvas, color, direction, tag, baseOffset = 0.25, edgeOffset = 0.1
     else:
         coords = (base, low, base, high, apex, middle)
     kw = {'fill' : color, 'outline' : color, 'tag' : tag}
-    apply(canvas.create_polygon, coords, kw)
+    canvas.create_polygon(*coords, **kw)
 
 #=============================================================================
 
@@ -1722,7 +1722,7 @@ class __TkinterCallWrapper:
     def __call__(self, *args):
         try:
             if self.subst:
-                args = apply(self.subst, args)
+                args = self.subst(*args)
             if _traceTk:
                 if not _callToTkReturned:
                     _traceTkFile.write('\n')
@@ -1744,7 +1744,7 @@ class __TkinterCallWrapper:
                 _traceTkFile.write('CALLBACK> %d:%s%s%s\n' %
                     (_recursionCounter, '  ' * _recursionCounter, name, argStr))
                 _traceTkFile.flush()
-            return apply(self.func, args)
+            return self.func(*args)
         except SystemExit, msg:
             raise SystemExit, msg
         except:

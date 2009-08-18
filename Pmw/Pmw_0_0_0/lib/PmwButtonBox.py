@@ -102,9 +102,9 @@ class ButtonBox(Pmw.MegaWidget):
         if not kw.has_key('text'):
             kw['text'] = componentName
         kw['default'] = 'normal'
-        button = apply(self.createcomponent, (componentName,
+        button = self.createcomponent(*(componentName,
                 (), 'Button',
-                Tkinter.Button, (self._buttonBoxFrame,)), kw)
+                Tkinter.Button, (self._buttonBoxFrame,)), **kw)
 
         index = self.index(beforeComponent, 1)
         horizontal = self['orient'] == 'horizontal'
@@ -135,7 +135,7 @@ class ButtonBox(Pmw.MegaWidget):
         return button
 
     def add(self, componentName, **kw):
-        return apply(self.insert, (componentName, len(self._buttonList)), kw)
+        return self.insert(*(componentName, len(self._buttonList)), **kw)
 
     def delete(self, index):
         index = self.index(index)

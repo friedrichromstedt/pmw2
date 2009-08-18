@@ -107,7 +107,7 @@ class PmwLoader:
             self.__dict__[name] = {}
         searchpath.reverse()
         for path in searchpath:
-            pathbit = apply(os.path.join, tuple(string.split(path[5:], '.')))
+            pathbit = os.path.join(*tuple(string.split(path[5:], '.')))
             lpath = os.path.join(self._dirpath, pathbit)
             d = {}
             execfile(os.path.join(lpath,_PMW_DEF), d)

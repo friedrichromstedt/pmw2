@@ -14,7 +14,7 @@ class MyButton(Tkinter.Button):
 	self.__toggle = 0
 	kw['background'] = 'green'
 	kw['activebackground'] = 'red'
-	apply(Tkinter.Button.__init__, (self, master, cnf), kw)
+	Tkinter.Button.__init__(*(self, master, cnf), **kw)
 
 class Demo:
     def __init__(self, parent):

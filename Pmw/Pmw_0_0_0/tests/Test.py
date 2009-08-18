@@ -238,10 +238,10 @@ def _constructor(isWidget, top, classCmd, kw):
 	print '====', classCmd.__name__, 'construction'
     if isWidget:
 	if dont_even_try:
-	    w = apply(classCmd, (top,), kw)
+	    w = classCmd(*(top,), **kw)
 	else:
 	    try:
-		w = apply(classCmd, (top,), kw)
+		w = classCmd(*(top,), **kw)
 	    except:
 		print 'Could not construct', classCmd.__name__
 		traceback.print_exc()
@@ -262,7 +262,7 @@ def _constructor(isWidget, top, classCmd, kw):
 		if dont_even_try:
 		    value = w.cget(option)
 		    if option not in ('class', 'container') and not initoption:
-		      apply(w.configure, (), {option : value})
+		      w.configure(*(), **{option : value})
 		      newvalue = w.cget(option)
 		      if newvalue != value:
 			print '====', classCmd.__name__, 'widget', \
@@ -279,7 +279,7 @@ def _constructor(isWidget, top, classCmd, kw):
 			value = w.cget(option)
 			if option not in ('class', 'container') and not initoption:
 			  try:
-			      apply(w.configure, (), {option : value})
+			      w.configure(*(), **{option : value})
 			      newvalue = w.cget(option)
                               if hasattr(_tkinter, 'Tcl_Obj') and \
                               (
@@ -319,7 +319,7 @@ def _constructor(isWidget, top, classCmd, kw):
 	    w.geometry('+100+100')
 	    w.title(classCmd.__name__)
     else:
-	w = apply(classCmd, (), kw)
+	w = classCmd(*(), **kw)
     return w
 
 def _destructor(widget, isWidget):
@@ -457,11 +457,11 @@ def _configureTest(w, testData):
     option = testData[0]
     value = testData[1]
     if dont_even_try:
-	apply(w.configure, (), {option: value})
+	w.configure(*(), **{option: value})
 	result = w.cget(option)
     else:
 	try:
-	    apply(w.configure, (), {option: value})
+	    w.configure(*(), **{option: value})
 	    result = w.cget(option)
 	except:
 	    result = _getErrorValue()
@@ -506,10 +506,10 @@ def _methodTest(w, testData):
     if type(func) == types.MethodType and func.im_self is None:
 	args = (w,) + args
     if dont_even_try:
-	result = apply(func, args, kw)
+	result = func(*args, **kw)
     else:
 	try:
-	    result = apply(func, args, kw)
+	    result = func(*args, **kw)
 	except:
 	    result = _getErrorValue()
     if hasattr(func, 'im_func'):

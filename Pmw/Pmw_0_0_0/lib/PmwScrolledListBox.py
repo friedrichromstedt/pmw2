@@ -62,7 +62,7 @@ class ScrolledListBox(Pmw.MegaWidget):
         if type(items) != types.TupleType:
             items = tuple(items)
         if len(items) > 0:
-            apply(self._listbox.insert, ('end',) + items)
+            self._listbox.insert(*('end',) + items)
 
         _registerScrolledList(self._listbox, self)
 
@@ -150,7 +150,7 @@ class ScrolledListBox(Pmw.MegaWidget):
         if len(items) > 0:
             if type(items) != types.TupleType:
                 items = tuple(items)
-            apply(self._listbox.insert, (0,) + items)
+            self._listbox.insert(*(0,) + items)
 
     # Override Tkinter.Listbox get method, so that if it is called with
     # no arguments, return all list elements (consistent with other widgets).

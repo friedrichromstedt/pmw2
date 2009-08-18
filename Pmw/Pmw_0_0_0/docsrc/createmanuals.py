@@ -115,7 +115,7 @@ def extractWidgetInfo (fileName, widgetName):
     field = None
     for dict in tryKeywords:
 	try:
-	    field = apply(cls, (), dict)
+	    field = cls(*(), **dict)
 	    break
 	except (KeyError, TypeError):
 	    pass

@@ -48,27 +48,19 @@ class _Branching:
 
     def addbranch(self, branchName = None, **kw):
         kw['indent'] = self['indent']
-        return apply(self._insertnode,
-                     ('tree', branchName, len(self._nodeNames),
-                      self._treeRoot),
-                     kw)
+        return self._insertnode(*('tree', branchName, len(self._nodeNames),
+                      self._treeRoot), **kw)
 
     def addleaf(self, leafName = None, **kw):
-        return apply(self._insertnode,
-                     ('leaf', leafName, len(self._nodeNames),
-                      self._treeRoot),
-                     kw)
+        return self._insertnode(*('leaf', leafName, len(self._nodeNames),
+                      self._treeRoot), **kw)
 
     def insertbranch(self, branchName = None, before = 0, **kw):
         kw['indent'] = self['indent']
-        return apply(self._insertnode,
-                     ('tree', branchName, before, self._treeRoot),
-                     kw)
+        return self._insertnode(*('tree', branchName, before, self._treeRoot), **kw)
     
     def insertleaf(self, leafName = None, before = 0, **kw):
-        return apply(self._insertnode,
-                     ('leaf', leafName, before, self._treeRoot),
-                     kw)
+        return self._insertnode(*('leaf', leafName, before, self._treeRoot), **kw)
 
     def _insertnode(self, type, nodeName, before, treeRoot, **kw):
         if 'selectbackground' not in kw.keys():
@@ -100,7 +92,7 @@ class _Branching:
             self._nodeAttrs[self._nodeNames[-1]]['branch']._setlast(0)
             
         if(type == 'tree'):
-            node = apply(self.createcomponent, ('branch%d'%len(self._nodeNames),
+            node = self.createcomponent(*('branch%d'%len(self._nodeNames),
                                                 (), None,
                                                 _BranchNode,
                                                 self._branchFrame,
@@ -108,10 +100,10 @@ class _Branching:
                                                 treeRoot,
                                                 self,
                                                 last,
-                                                ), kw)
+                                                ), **kw)
             attributes['nodetype'] = 'TreeNode'
         else:
-            node = apply(self.createcomponent, ('leaf%d'%len(self._nodeNames),
+            node = self.createcomponent(*('leaf%d'%len(self._nodeNames),
                                                 (), None,
                                                 _LeafNode,
                                                 self._branchFrame,
@@ -119,7 +111,7 @@ class _Branching:
                                                 treeRoot,
                                                 self,
                                                 last,
-                                                ), kw)
+                                                ), **kw)
             attributes['nodetype'] = 'LeafNode'
 
         if len(self._nodeNames) == beforeIndex:
@@ -339,9 +331,7 @@ class _BranchNode(_LeafNode, _Branching): #Pmw.MegaWidget):
 	self.defineoptions(kw, optiondefs)
 
 	# Initialise the base class (after defining the options).
-        apply(_LeafNode.__init__,
-              (self, parent, nodeName, treeRoot, parentnode, last),
-              kw)
+        _LeafNode.__init__(*(self, parent, nodeName, treeRoot, parentnode, last), **kw)
         _Branching.__init__(self)
 
         # Create the components

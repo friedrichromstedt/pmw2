@@ -24,7 +24,7 @@ class LabeledDateCounter(Pmw.Counter):
         kw['entryfield_value'] = text
         kw['labelpos'] = 'w'
 
-	apply(Pmw.Counter.__init__, (self, parent), kw)
+	Pmw.Counter.__init__(*(self, parent), **kw)
 
 class LabeledRealCounter(Pmw.Counter):
 
@@ -38,7 +38,7 @@ class LabeledRealCounter(Pmw.Counter):
         kw['entryfield_value'] = 50.0
         kw['labelpos'] = 'w'
 
-	apply(Pmw.Counter.__init__, (self, parent), kw)
+	Pmw.Counter.__init__(*(self, parent), **kw)
 
 class Demo:
     def __init__(self, parent):

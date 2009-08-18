@@ -148,9 +148,9 @@ class NoteBook(Pmw.MegaArchetype):
                 raise KeyError, 'Unknown option "' + key + '"'
 
         # Create the frame to contain the page.
-        page = apply(self.createcomponent, (pageName,
+        page = self.createcomponent(*(pageName,
                 (), 'Page',
-                Tkinter.Frame, self._hull), pageOptions)
+                Tkinter.Frame, self._hull), **pageOptions)
 
         attributes = {}
         attributes['page'] = page
@@ -161,9 +161,9 @@ class NoteBook(Pmw.MegaArchetype):
             def raiseThisPage(self = self, pageName = pageName):
                 self.selectpage(pageName)
             tabOptions['command'] = raiseThisPage
-            tab = apply(self.createcomponent, (pageName + '-tab',
+            tab = self.createcomponent(*(pageName + '-tab',
                     (), 'Tab',
-                    Tkinter.Button, self._hull), tabOptions)
+                    Tkinter.Button, self._hull), **tabOptions)
 
             if self['arrownavigation']:
                 # Allow the use of the arrow keys for Tab navigation:
@@ -201,7 +201,7 @@ class NoteBook(Pmw.MegaArchetype):
         return page
         
     def add(self, pageName, **kw):
-        return apply(self.insert, (pageName, len(self._pageNames)), kw)
+        return self.insert(*(pageName, len(self._pageNames)), **kw)
 
     def delete(self, *pageNames):
         newTopPage = 0
@@ -227,7 +227,7 @@ class NoteBook(Pmw.MegaArchetype):
                                 
             if self._withTabs:
                 self.destroycomponent(pageName + '-tab')
-                apply(self._hull.delete, pageInfo['tabitems'])
+                self._hull.delete(*pageInfo['tabitems'])
             self.destroycomponent(pageName)
             del self._pageAttrs[pageName]
             del self._pageNames[pageIndex]

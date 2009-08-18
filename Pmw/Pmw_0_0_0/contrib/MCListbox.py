@@ -636,7 +636,7 @@ class MultiColumnListbox(Pmw.MegaWidget):
                 cfg['Cellframerowid.%d_background'%lineid] = self['background']
                 #cfg['Cellframerowid%d_relief'%cursel] = 'flat'
             
-        apply(self.configure, (), cfg)
+        self.configure(*(), **cfg)
         self._cursel = [row]
 
         cmd = self['command']

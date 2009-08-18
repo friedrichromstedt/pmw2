@@ -160,9 +160,9 @@ class RadioSelect(Pmw.MegaWidget):
             if not kw.has_key('anchor'):
                 kw['anchor'] = 'w'
 
-        button = apply(self.createcomponent, (componentName,
+        button = self.createcomponent(*(componentName,
                 (), 'Button',
-                self.buttonClass, (self._radioSelectFrame,)), kw)
+                self.buttonClass, (self._radioSelectFrame,)), **kw)
 
         if self['orient'] == 'horizontal':
             self._radioSelectFrame.grid_rowconfigure(0, weight=1)

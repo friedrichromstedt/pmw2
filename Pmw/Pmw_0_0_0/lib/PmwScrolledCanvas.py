@@ -284,6 +284,6 @@ class ScrolledCanvas(Pmw.MegaWidget):
     # Need to explicitly forward this to override the stupid
     # (grid_)bbox method inherited from Tkinter.Frame.Grid.
     def bbox(self, *args):
-        return apply(self._canvas.bbox, args)
+        return self._canvas.bbox(*args)
 
 Pmw.forwardmethods(ScrolledCanvas, Tkinter.Canvas, '_canvas')

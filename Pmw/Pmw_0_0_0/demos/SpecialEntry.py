@@ -15,7 +15,7 @@ class SpecialEntry(Pmw.EntryField):
     def __init__(self, parent=None , **kw):
 
         kw['extravalidators'] = _myValidators
-	apply(Pmw.EntryField.__init__, (self, parent), kw)
+	Pmw.EntryField.__init__(*(self, parent), **kw)
 	self._converter = None
 
     def setentry(self, text):

@@ -129,7 +129,7 @@ class GraphDemo(Pmw.MegaToplevel):
 
     def _setelementtype(self, type):
         elements = self._graph.element_names()
-	apply(self._graph.element_delete, elements)
+	self._graph.element_delete(*elements)
 
         if type == 'none':
             return

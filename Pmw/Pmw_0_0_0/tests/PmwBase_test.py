@@ -35,7 +35,7 @@ class TestWidget(Pmw.MegaWidget):
 	w = self.createcomponent('test',
 		(), None,
 		widget, (self.interior(),))
-	apply(self.configure, (), {'test_' + option : value})
+	self.configure(*(), **{'test_' + option : value})
 	if w.__class__.__name__ not in ('Menu', 'Toplevel'):
 	    w.pack()
 	if hasattr(widget, 'geometry'):
@@ -169,7 +169,7 @@ fontList = (
 )
 
 for args, dict in fontList:
-    font = apply(Pmw.logicalfont, args, dict)
+    font = Pmw.logicalfont(*args, **dict)
     tests = tests + (
         ('label_text', 'Testing font\n' + str(args) + '\n' + str(dict)),
         ('label_font', font),

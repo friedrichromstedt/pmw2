@@ -99,7 +99,7 @@ class Demo:
         # Initialise the first page and the initial colour.
         if not self.withTabs:
             self.optionmenu.setitems(self.notebook.pagenames())
-        apply(Pmw.Color.setscheme, (self.mainframe,), defaultPalette)
+        Pmw.Color.setscheme(*(self.mainframe,), **defaultPalette)
         self.pageCounter = 0
 
     def insertpage(self):
@@ -144,7 +144,7 @@ class Demo:
             self.optionmenu.setitems(
                 self.notebook.pagenames(), self.notebook.getcurselection())
 
-        apply(Pmw.Color.setscheme, (self.mainframe,), defaultPalette)
+        Pmw.Color.setscheme(*(self.mainframe,), **defaultPalette)
 
     def addbutton(self):
         # Add a button to a random page.
@@ -169,7 +169,7 @@ class Demo:
         button = Tkinter.Button(page, text = 'This is an extra button')
         button.pack(expand = 1)
 
-        apply(Pmw.Color.setscheme, (self.mainframe,), defaultPalette)
+        Pmw.Color.setscheme(*(self.mainframe,), **defaultPalette)
 
     def deletepage(self):
         # Delete a random page

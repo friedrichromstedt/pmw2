@@ -77,7 +77,7 @@ class Demo:
                 header = header + '\n'
             self.st.insert('end', dataLine)
             self.st.component('rowheader').insert('end', header)
-        apply(self.st.tag_add, ('yellow',) + tuple(tagList))
+        self.st.tag_add(*('yellow',) + tuple(tagList))
 
         # Prevent users' modifying text and headers
         self.st.configure(

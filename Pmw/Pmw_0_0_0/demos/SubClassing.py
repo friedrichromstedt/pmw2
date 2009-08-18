@@ -22,7 +22,7 @@ class OverrideInit(Pmw.EntryField):
 
     def __init__(self, textToAdd, parent = None, **kw):
         self._textToAdd = textToAdd
-	apply(Pmw.EntryField.__init__, (self, parent), kw)
+	Pmw.EntryField.__init__(*(self, parent), **kw)
 
     def addtext(self):
 	self.setvalue(self.getvalue() + ' ' + self._textToAdd)
@@ -35,7 +35,7 @@ class DefaultOptions(Pmw.EntryField):
     def __init__(self, parent = None, **kw):
         kw['label_foreground'] = 'blue'
         kw['entry_background'] = 'white'
-	apply(Pmw.EntryField.__init__, (self, parent), kw)
+	Pmw.EntryField.__init__(*(self, parent), **kw)
 
 class NewOptions(Pmw.EntryField):
 

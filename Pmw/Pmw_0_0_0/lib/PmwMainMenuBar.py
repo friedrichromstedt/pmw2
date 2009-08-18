@@ -117,11 +117,11 @@ class MainMenuBar(Pmw.MegaArchetype):
         else:
             parentMenu = self.component(parentMenuName)
 
-        apply(parentMenu.add_cascade, (), kw)
+        parentMenu.add_cascade(*(), **kw)
 
-        menu = apply(self.createcomponent, (menuName,
+        menu = self.createcomponent(*(menuName,
                 (), 'Menu',
-                Tkinter.Menu, (parentMenu,)), menukw)
+                Tkinter.Menu, (parentMenu,)), **menukw)
         parentMenu.entryconfigure('end', menu = menu)
 
         self._menuInfo[parentMenuName][1].append(statusHelp)
@@ -153,7 +153,7 @@ class MainMenuBar(Pmw.MegaArchetype):
             raise ValueError, 'unknown menuitem type "%s"' % itemType
 
         self._menuInfo[menuName][1].append(statusHelp)
-        apply(command, (), kw)
+        command(*(), **kw)
 
     def _addHotkeyToOptions(self, menuName, kw, traverseSpec):
 

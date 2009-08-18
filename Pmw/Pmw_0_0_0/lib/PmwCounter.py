@@ -220,8 +220,7 @@ class Counter(Pmw.MegaWidget):
 
         text = self._counterEntry.get()
         try:
-            value = apply(self._counterCommand,
-                    (text, factor, self['increment']), self._counterArgs)
+            value = self._counterCommand(*(text, factor, self['increment']), **self._counterArgs)
         except ValueError:
             self.bell()
             return
@@ -239,8 +238,7 @@ class Counter(Pmw.MegaWidget):
         self._timerId = None
         origtext = self._counterEntry.get()
         try:
-            value = apply(self._counterCommand,
-                    (origtext, factor, self['increment']), self._counterArgs)
+            value = self._counterCommand(*(origtext, factor, self['increment']), **self._counterArgs)
         except ValueError:
             # If text is invalid, stop counting.
             self._stopCounting()
