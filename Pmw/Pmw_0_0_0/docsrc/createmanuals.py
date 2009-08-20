@@ -57,7 +57,7 @@ defFile = '../../Pmw_%s/lib/Pmw.def' % PMW_DIR
 if not os.path.exists(defFile):
     print 'No such file', defFile
     sys.exit()
-execfile(defFile)
+exec(open(defFile).read())
 
 # Where to put the html documents.
 pmwDocHtmlDir = '../doc'

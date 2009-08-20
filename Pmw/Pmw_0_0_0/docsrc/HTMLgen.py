@@ -298,7 +298,7 @@ class Document:
         self.server_root = ''
         self.myurl = ''
         # Read stuff from resource file into instance namespace
-        if resource: execfile(mpath(resource), self.__dict__)
+        if resource: exec(open(mpath(resource)).read(), self.__dict__)
         # Overlay keyword parameter values
         for item in kw.keys():
             if item in self.__dict__:

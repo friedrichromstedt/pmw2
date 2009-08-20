@@ -110,7 +110,7 @@ class PmwLoader:
             pathbit = os.path.join(*tuple(string.split(path[5:], '.')))
             lpath = os.path.join(self._dirpath, pathbit)
             d = {}
-            execfile(os.path.join(lpath,_PMW_DEF), d)
+            exec(open(os.path.join(lpath,_PMW_DEF)).read(), d)
             for k,v in d.items():
                 if k in dict:
                     if type(v) == types.TupleType:
