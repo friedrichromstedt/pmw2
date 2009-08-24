@@ -421,9 +421,7 @@ class MegaArchetype:
 
         # optimisations:
         optionInfo = self._optionInfo
-        #optionInfo_has_key = optionInfo.has_key
         keywords = self._constructorKeywords
-        #keywords_has_key = keywords.has_key
         FUNCTION = _OPT_FUNCTION
 
         for name, default, function in optionDefs:
@@ -432,8 +430,8 @@ class MegaArchetype:
                 # in a derived class.  In this case, do not override the
                 # default value of the option or the callback function
                 # if it is not None.
-                if not name in optionInfo: #_has_key(name):
-                    if name in keywords: #_has_key(name):
+                if not name in optionInfo:
+                    if name in keywords:
                         value = keywords[name][0]
                         optionInfo[name] = [default, value, function]
                         del keywords[name]
@@ -450,7 +448,7 @@ class MegaArchetype:
                 # not already defined in self._constructorKeywords add it.
                 # This allows a derived class to override the default value
                 # of an option of a component of a base class.
-                if not name in keywords: #_has_key(name):
+                if not name in keywords:
                     keywords[name] = [default, 0]
 
     def createcomponent(self, componentName, componentAliases,
@@ -641,11 +639,8 @@ class MegaArchetype:
 
         # optimisations:
         optionInfo = self._optionInfo
-        #optionInfo_has_key = optionInfo.has_key
         componentInfo = self.__componentInfo
-        #componentInfo_has_key = componentInfo.has_key
         componentAliases = self.__componentAliases
-        #componentAliases_has_key = componentAliases.has_key
         VALUE = _OPT_VALUE
         FUNCTION = _OPT_FUNCTION
 
@@ -660,10 +655,9 @@ class MegaArchetype:
         # component and whose values are a dictionary of options and
         # values for the component.
         indirectOptions = {}
-        #indirectOptions_has_key = indirectOptions.has_key
 
         for option, value in kw.items():
-            if option in optionInfo: #_has_key(option):
+            if option in optionInfo:
                 # This is one of the options of this megawidget. 
                 # Make sure it is not an initialisation option.
                 if optionInfo[option][FUNCTION] is INITOPT:
@@ -680,7 +674,7 @@ class MegaArchetype:
                     componentOption = option[(index + 1):]
 
                     # Expand component alias
-                    if component in componentAliases: #_has_key(component):
+                    if component in componentAliases:
                         component, subComponent = componentAliases[component]
                         if subComponent is not None:
                             componentOption = subComponent + '_' \
@@ -689,7 +683,7 @@ class MegaArchetype:
                         # Expand option string to write on error
                         option = component + '_' + componentOption
 
-                    if component in componentInfo:#_has_key(component):
+                    if component in componentInfo:
                         # Configure the named component
                         componentConfigFuncs = [componentInfo[component][1]]
                     else:
@@ -709,7 +703,7 @@ class MegaArchetype:
                     # one if this is configuring a component group)
                     # and option/value to dictionary.
                     for componentConfigFunc in componentConfigFuncs:
-                        if not componentConfigFunc in indirectOptions:#_has_key(componentConfigFunc):
+                        if not componentConfigFunc in indirectOptions:
                             indirectOptions[componentConfigFunc] = {}
                         indirectOptions[componentConfigFunc][componentOption] \
                                 = value
@@ -721,9 +715,6 @@ class MegaArchetype:
         for call, kwd in indirectOptions.items():
             call( *((),), **kwd)
             
-        #map(apply, indirectOptions.keys(),
-        #        ((),) * len(indirectOptions), indirectOptions.values())
-
         # Call the configuration callback function for each option.
         for option in directOptions:
             info = optionInfo[option]
