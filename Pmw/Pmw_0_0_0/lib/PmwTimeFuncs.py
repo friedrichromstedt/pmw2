@@ -1,10 +1,9 @@
 # Functions for dealing with dates and times.
 
 import re
-import string
 
 def timestringtoseconds(text, separator = ':'):
-  inputList = string.split(string.strip(text), separator)
+  inputList = text.strip().split( separator)
   if len(inputList) != 3:
     raise ValueError, 'invalid value: ' + text
 
@@ -14,7 +13,7 @@ def timestringtoseconds(text, separator = ':'):
       sign = -1
     inputList[0] = inputList[0][1:]
 
-  if re.search('[^0-9]', string.join(inputList, '')) is not None:
+  if re.search('[^0-9]', ''.join(inputList)) is not None:
     raise ValueError, 'invalid value: ' + text
 
   hour = int(inputList[0])
@@ -38,11 +37,11 @@ def setyearpivot(pivot, century = None):
     return oldvalues
 
 def datestringtojdn(text, format = 'ymd', separator = '/'):
-  inputList = string.split(string.strip(text), separator)
+  inputList = text.strip().split(separator)
   if len(inputList) != 3:
     raise ValueError, 'invalid value: ' + text
 
-  if re.search('[^0-9]', string.join(inputList, '')) is not None:
+  if re.search('[^0-9]', ''.join(inputList)) is not None:
     raise ValueError, 'invalid value: ' + text
   formatList = list(format)
   day = int(inputList[formatList.index('d')])
@@ -138,9 +137,9 @@ def jdntoymd(jdn, julian = -1, papal = 1):
 
 def stringtoreal(text, separator = '.'):
     if separator != '.':
-        if string.find(text, '.') >= 0:
+        if text.find( '.') >= 0:
             raise ValueError, 'invalid value: ' + text
-        index = string.find(text, separator)
+        index = text.find( separator)
         if index >= 0:
             text = text[:index] + '.' + text[index + 1:]
     return float(text)

@@ -4,7 +4,6 @@
 # To add a new test, create a function with name ending in '_test'.
 
 import os
-import string
 import time
 import sys
 import Test
@@ -431,11 +430,9 @@ def memoryleak2_test():
         # lines = os.popen('top').readlines()
         lines = os.popen('top -b -n 1 -p %d' % pid).readlines()
         for line in lines:
-            # if string.find(line, 'python1.5.2') > 0:
-            if string.find(line, '^ *%d' % pid) > 0:
+            if line.find( '^ *%d' % pid) > 0:
                 break
-        # size = int(string.lstrip(line[27:32]))
-        size = int(string.lstrip(line[22:29]))
+        size = int(line[22:29].lstrip())
         if prevSize != size:
             print time.strftime('%H:%M:%S', time.localtime(time.time())),
             print line[:-1]

@@ -32,7 +32,6 @@ import dis
 import os
 import re
 import shutil
-import string
 import time
 import types
 import Tkinter
@@ -48,8 +47,7 @@ if len(sys.argv) != 1:
 
 PMW_DIR = os.path.basename(os.path.dirname(os.getcwd()))[4:]
 VERSION = re.sub('_', '.', PMW_DIR)
-VERSION_DATE = string.strip(
-    time.strftime('%e %B %Y', time.localtime(time.time())))
+VERSION_DATE = time.strftime('%e %B %Y', time.localtime(time.time())).strip()
 Pmw.setversion(VERSION)
 
 # Create _modules and _functions attributes.
@@ -240,7 +238,7 @@ def getFunctionArgs(function, isMethod = 0):
 		else:
 		    p = p + 1
 	    if vars:
-		arg = "(" + string.join(vars, ", ") + ")"
+		arg = "(" + ", ".join(vars) + ")"
 
 
 
@@ -263,7 +261,7 @@ def getFunctionArgs(function, isMethod = 0):
 	args.append(arg)
 	index = index + 1
 
-    return '(' + string.join(args, ', ') + ')'
+    return '(' + ', '.join(args) + ')'
 
 def getRepr(obj):
     if obj is Pmw.DEFAULT:
@@ -284,26 +282,26 @@ def getPartText(widgetName, part, type):
     # part.
     textDict = widgetInfo[widgetName]['text'].text[type]
     if part in textDict:
-	return string.strip(textDict[part])
+	return textDict[part].strip()
 
     # No text was found specific to the widget, try the base class
     # descriptions.
     for base in widgetInfo[widgetName]['bases']:
         text = getPartText(base, part, type)
         if text is not None:
-            return string.strip(text)
+            return text.strip()
 
     # No text was found specific to the widget or base classes, try
     # the special createlabel descriptions.
     if type == 'options':
 	if part == 'labelmargin':
-	    return string.strip(default_text.labelmargin_option)
+	    return default_text.labelmargin_option.strip()
 	elif part == 'labelpos':
-	    return string.strip(default_text.labelpos_option)
+	    return default_text.labelpos_option.strip()
 
     if type == 'components':
 	if part == 'label':
-	    return string.strip(default_text.label_component)
+	    return default_text.label_component.strip()
 
     # No description found
     return None
@@ -653,7 +651,7 @@ def printSection(widgetName, sectionName):
             while lines[-1] == '\n':
                 del lines[-1]
 	    print '<pre>'
-            escapedText = cgi.escape(string.join(lines, ''))
+            escapedText = cgi.escape(''.join(lines))
             print StructuredText.untabify(escapedText)
 	    print '</pre>'
             print '</dd>'
