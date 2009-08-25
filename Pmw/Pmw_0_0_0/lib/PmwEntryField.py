@@ -387,7 +387,7 @@ def realvalidator(text, separator = '.'):
         if index >= 0:
             text = text[:index] + '.' + text[index + 1:]
     try:
-        string.atof(text)
+        float(text)
         return OK
     except ValueError:
         # Check if the string could be made valid by appending a digit
@@ -397,7 +397,7 @@ def realvalidator(text, separator = '.'):
         if text[-1] in string.digits:
             return ERROR
         try:
-            string.atof(text + '0')
+            float(text + '0')
             return PARTIAL
         except ValueError:
             return ERROR

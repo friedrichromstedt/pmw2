@@ -144,7 +144,7 @@ class ScrolledFrame(Pmw.MegaWidget):
     def xview(self, mode = None, value = None, units = None):
 
         if type(value) == types.StringType:
-            value = string.atof(value)
+            value = float(value)
         if mode is None:
             return self._horizScrollbar.get()
         elif mode == 'moveto':
@@ -166,7 +166,7 @@ class ScrolledFrame(Pmw.MegaWidget):
     def yview(self, mode = None, value = None, units = None):
 
         if type(value) == types.StringType:
-            value = string.atof(value)
+            value = float(value)
         if mode is None:
             return self._vertScrollbar.get()
         elif mode == 'moveto':

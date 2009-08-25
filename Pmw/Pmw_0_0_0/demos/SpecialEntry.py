@@ -96,7 +96,7 @@ _converters = {
 
 _myValidators = {
     'date' : (_date, lambda s: Pmw.datestringtojdn(s, 'dmy', '.')),
-    'real' : (_real, lambda s: string.atof(_realconv(s, 1))),
+    'real' : (_real, lambda s: float(_realconv(s, 1))),
     'int4' : ('numeric', 'numeric'),
     'oid' : ('int4', 'int4'),
     'float8' : ('real', 'real'),

@@ -104,7 +104,7 @@ def parseArgs(title, argv, argSpecs, filesOK):
 		  value = int(value)
 	      elif type(spec[DEFAULT]) == types.FloatType:
 		  typeStr = 'float'
-		  value = string.atof(value)
+		  value = float(value)
 	  except:
 	      sys.exc_traceback = None   # Clean up object references
 	      return errMsg + 'cannot convert string \'' + value + \

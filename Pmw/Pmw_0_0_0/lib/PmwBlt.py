@@ -77,7 +77,7 @@ def busy_forget(window):
 def vector_expr(expression):
     tk = Tkinter._default_root.tk
     strList = tk.splitlist(tk.call(_vectorCommand, 'expr', expression))
-    return tuple(map(string.atof, strList))
+    return tuple(map(float, strList))
 
 def vector_names(pattern = None):
     tk = Tkinter._default_root.tk

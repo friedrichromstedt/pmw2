@@ -139,7 +139,7 @@ text['options']['validate'] = """
 	by /string.atol(text, 16)/.
 
     *'real'* -- A number, with or without a decimal point and optional
-	exponent (e or E), as accepted by /string.atof()/.  This
+	exponent (e or E), as accepted by /float()/.  This
 	validator accepts a *'separator'* argument, which specifies
 	the character used to represent the decimal point.  The
 	default *'separator'* is *'.'*.

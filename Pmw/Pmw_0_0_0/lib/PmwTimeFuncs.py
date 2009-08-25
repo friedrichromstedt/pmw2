@@ -143,4 +143,4 @@ def stringtoreal(text, separator = '.'):
         index = string.find(text, separator)
         if index >= 0:
             text = text[:index] + '.' + text[index + 1:]
-    return string.atof(text)
+    return float(text)

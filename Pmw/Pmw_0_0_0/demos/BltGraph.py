@@ -124,7 +124,7 @@ class GraphDemo(Pmw.MegaToplevel):
             num = int(value)
             return '%d      %3d' % (num * 3, num)
         except ValueError:
-            num = string.atof(value)
+            num = float(value)
             return '%g      %3g' % (num * 3, num)
 
     def _setelementtype(self, type):

@@ -69,7 +69,7 @@ text['options']['datatype'] = """
 
     *'integer'* -- Same as *'numeric'*.
 
-    *'real'* -- A real number, as accepted by /string.atof()/.  This
+    *'real'* -- A real number, as accepted by /float()/.  This
 	counter accepts a *'separator'* argument, which specifies
 	the character used to represent the decimal point.  The
 	default *'separator'* is *'.'*.

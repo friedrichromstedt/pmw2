@@ -192,7 +192,7 @@ def _print_results(result, expected, description):
 	    elif type(expected) == types.FloatType:
 		if type(result) is types.StringType:
 		    try:
-			ok = (string.atof(result) == expected)
+			ok = (float(result) == expected)
 		    except ValueError:
 			pass
 	    elif expected == callback:

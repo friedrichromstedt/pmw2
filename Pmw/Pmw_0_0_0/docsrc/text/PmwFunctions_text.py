@@ -178,7 +178,7 @@ datestringtojdn = """
 
 stringtoreal = """
     Return the real number represented by 'text'.  This is similar to
-    /string.atof()/ except that the character representing the decimal
+    /float()/ except that the character representing the decimal
     point in 'text' is given by 'separator'.
 
 """

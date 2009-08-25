@@ -105,11 +105,11 @@ class Demo:
     def execute(self):
 	try:
 	    numColors = int(self.numColors.get())
-	    correction = string.atof(self.correction.get())
-	    saturation = string.atof(self.saturation.get())
-	    intensity = string.atof(self.intensity.get())
-	    extraOrange = string.atof(self.extraOrange.get())
-	    brightness = string.atof(self.brightness.get())
+	    correction = float(self.correction.get())
+	    saturation = float(self.saturation.get())
+	    intensity = float(self.intensity.get())
+	    extraOrange = float(self.extraOrange.get())
+	    brightness = float(self.brightness.get())
 	except ValueError:
 	    self.numColors.bell()
 	    return

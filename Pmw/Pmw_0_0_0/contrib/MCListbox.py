@@ -413,7 +413,7 @@ class MultiColumnListbox(Pmw.MegaWidget):
 
         if mode == 'moveto':
             frameWidth = self._hsframe.winfo_reqwidth()
-            self.startX = string.atof(value) * float(frameWidth)
+            self.startX = float(value) * float(frameWidth)
         else:
             clipperWidth = self._hclipper.winfo_width()
             if units == 'units':
@@ -435,7 +435,7 @@ class MultiColumnListbox(Pmw.MegaWidget):
 
         if mode == 'moveto':
             frameHeight = self._vsframe.winfo_reqheight()
-            self.startY = string.atof(value) * float(frameHeight)
+            self.startY = float(value) * float(frameHeight)
         else:
             clipperHeight = self._vclipper.winfo_height()
             if units == 'units':
