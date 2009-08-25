@@ -9,7 +9,6 @@
 
 import sys
 import os
-import string
 import types
 
 _PMW_DEF = 'Pmw.def'           # Pmw definition file
@@ -22,7 +21,7 @@ class PmwLoader:
         self._instdirs = instdirs
         self._dirs = dirs
         self._initialised = 0
-        self._version = string.replace(instdirs[0][4:], '_', '.')
+        self._version = instdirs[0][4:].replace( '_', '.')
         self._alpha_versions = ()
         
     #======================================================================
@@ -57,10 +56,10 @@ class PmwLoader:
             dirs.sort()
             dirs.reverse()
             for dir in dirs:
-                rtn.append(string.replace(dir[6:], '_', '.'))
+                rtn.append(dir[6:].replace( '_', '.'))
         else:
             for dir in self._instdirs:
-                rtn.append(string.replace(dir[4:], '_', '.'))
+                rtn.append(dir[4:].replace( '_', '.'))
         return rtn
 
     #======================================================================
@@ -76,10 +75,10 @@ class PmwLoader:
         searchpath = []
 
         for version in self._alpha_versions:
-            alphadir = '_Pmw.Alpha_%s.lib' % string.replace(version, '.', '_')
+            alphadir = '_Pmw.Alpha_%s.lib' % version.replace( '.', '_')
             searchpath.append(alphadir)
 
-        libdir = '_Pmw.Pmw_%s.lib' % string.replace(self._version, '.', '_')
+        libdir = '_Pmw.Pmw_%s.lib' % self._version.replace( '.', '_')
         searchpath.append(libdir)
 
         # Create attributes for the PmwBase classes and functions.
@@ -107,7 +106,7 @@ class PmwLoader:
             self.__dict__[name] = {}
         searchpath.reverse()
         for path in searchpath:
-            pathbit = os.path.join(*tuple(string.split(path[5:], '.')))
+            pathbit = os.path.join(*tuple(path[5:].split( '.')))
             lpath = os.path.join(self._dirpath, pathbit)
             d = {}
             exec(open(os.path.join(lpath,_PMW_DEF)).read(), d)

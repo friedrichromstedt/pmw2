@@ -1,6 +1,5 @@
 # Class to display messages in an information line.
 
-import string
 import Tkinter
 import Pmw
 
@@ -84,7 +83,7 @@ class MessageBar(Pmw.MegaWidget):
         self._activemessage[priority] = 1
         if text is None:
             text = ''
-        self._messagetext[priority] = string.replace(text, '\n', ' ')
+        self._messagetext[priority] = text.replace( '\n', ' ')
         self._redisplayInfoMessage()
 
         if logmessage:

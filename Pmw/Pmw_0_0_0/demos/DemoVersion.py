@@ -3,7 +3,6 @@
 
 import imp
 import os
-import string
 
 def expandLinks(path):
     if not os.path.isabs(path):
@@ -27,7 +26,7 @@ def setPmwVersion():
     dir = expandLinks(dir)
     dir = os.path.basename(dir)
 
-    version = string.replace(dir[4:], '_', '.')
+    version = dir[4:].replace( '_', '.')
     import Pmw
     if version in Pmw.installedversions():
 	Pmw.setversion(version)

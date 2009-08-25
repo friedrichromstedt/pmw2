@@ -11,7 +11,6 @@
 
 import os
 import re
-import string
 import sys
 
 # The order of these files is significant.  Files which reference
@@ -66,7 +65,7 @@ dir = os.path.dirname(dir)
 dir = expandLinks(dir)
 dir = os.path.basename(dir)
 
-version = string.replace(dir[4:], '_', '.')
+version = dir[4:].replace( '_', '.')
 
 # Code to import the Color module.
 colorCode = """

@@ -3,7 +3,6 @@
 
 import imp
 import os
-import string
 import Pmw
 
 file = imp.find_module(__name__)[1]
@@ -15,5 +14,5 @@ dir = os.path.dirname(file)
 dir = os.path.dirname(dir)
 dir = os.path.basename(dir)
 
-version = string.replace(dir[4:], '_', '.')
+version = dir[4:].replace( '_', '.')
 Pmw.setversion(version)
