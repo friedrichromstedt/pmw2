@@ -101,7 +101,7 @@ def parseArgs(title, argv, argSpecs, filesOK):
 	  try:
 	      if type(spec[DEFAULT]) == types.IntType:
 		  typeStr = 'integer'
-		  value = string.atoi(value)
+		  value = int(value)
 	      elif type(spec[DEFAULT]) == types.FloatType:
 		  typeStr = 'float'
 		  value = string.atof(value)

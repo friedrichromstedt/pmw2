@@ -350,8 +350,8 @@ class Balloon(Pmw.MegaToplevel):
             y = bottomrel + widget.winfo_rooty()
         y = y + self['yoffset']
 
-        edges = (string.atoi(str(self.cget('hull_highlightthickness'))) +
-            string.atoi(str(self.cget('hull_borderwidth')))) * 2
+        edges = (int(str(self.cget('hull_highlightthickness'))) +
+            int(str(self.cget('hull_borderwidth')))) * 2
         if x + self._label.winfo_reqwidth() + edges > screenWidth:
             x = screenWidth - self._label.winfo_reqwidth() - edges
 

@@ -183,12 +183,12 @@ def _print_results(result, expected, description):
 	    elif type(expected) == types.IntType:
 		if type(result) is types.StringType:
 		    try:
-			ok = (string.atoi(result) == expected)
+			ok = (int(result) == expected)
 		    except ValueError:
 			pass
                 elif hasattr(_tkinter, 'Tcl_Obj') and \
                         type(result) == _tkinter.Tcl_Obj:
-                    ok = (string.atoi(str(result)) == expected)
+                    ok = (int(str(result)) == expected)
 	    elif type(expected) == types.FloatType:
 		if type(result) is types.StringType:
 		    try:

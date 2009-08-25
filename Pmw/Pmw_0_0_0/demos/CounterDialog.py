@@ -40,7 +40,7 @@ class Demo:
 		print 'Invalid entry: "' + count + '"'
 	    else:
 		print 'Ringing the bell ' + count + ' times'
-		for num in range(string.atoi(count)):
+		for num in range(int(count)):
 		    if num != 0:
 			self.dialog.after(200)
 		    self.dialog.bell()

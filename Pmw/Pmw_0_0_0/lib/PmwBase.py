@@ -1630,10 +1630,10 @@ class _BusyWrapper:
 def drawarrow(canvas, color, direction, tag, baseOffset = 0.25, edgeOffset = 0.15):
     canvas.delete(tag)
 
-    bw = (string.atoi(canvas['borderwidth']) + 
-            string.atoi(canvas['highlightthickness']))
-    width = string.atoi(canvas['width'])
-    height = string.atoi(canvas['height'])
+    bw = (int(canvas['borderwidth']) + 
+            int(canvas['highlightthickness']))
+    width = int(canvas['width'])
+    height = int(canvas['height'])
 
     if direction in ('up', 'down'):
         majorDimension = height
@@ -1727,7 +1727,7 @@ class __TkinterCallWrapper:
                     name = self.func.__name__
                 if len(args) == 1 and hasattr(args[0], 'type'):
                     # The argument to the callback is an event.
-                    eventName = _eventTypeToName[string.atoi(args[0].type)]
+                    eventName = _eventTypeToName[int(args[0].type)]
                     if eventName in ('KeyPress', 'KeyRelease',):
                         argStr = '(%s %s Event: %s)' % \
                             (eventName, args[0].keysym, args[0].widget)
@@ -1780,7 +1780,7 @@ def _reporterror(func, args):
 
     # If the argument to the callback is an event, add the event type.
     if eventArg:
-        eventNum = string.atoi(args[0].type)
+        eventNum = int(args[0].type)
         if eventNum in _eventTypeToName.keys():
             msg = msg + '  Event type: %s (type num: %d)\n' % \
                     (_eventTypeToName[eventNum], eventNum)

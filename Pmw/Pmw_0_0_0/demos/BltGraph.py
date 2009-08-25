@@ -121,7 +121,7 @@ class GraphDemo(Pmw.MegaToplevel):
 
     def yaxisCommand(self, graph, value):
         try:
-            num = string.atoi(value)
+            num = int(value)
             return '%d      %3d' % (num * 3, num)
         except ValueError:
             num = string.atof(value)
@@ -223,7 +223,7 @@ class Demo:
 	self.parent = parent
 
     def showGraphDemo(self):
-	size = string.atoi(self.combo.get())
+	size = int(self.combo.get())
 	demo = GraphDemo(self.parent, size = size)
         demo.focus()
 

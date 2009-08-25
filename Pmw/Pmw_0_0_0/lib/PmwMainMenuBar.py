@@ -175,7 +175,7 @@ class MainMenuBar(Pmw.MegaArchetype):
             for item in range(end + 1):
                 if menu.type(item) not in ('separator', 'tearoff'):
                     underline = \
-                            string.atoi(str(menu.entrycget(item, 'underline')))
+                            int(str(menu.entrycget(item, 'underline')))
                     if underline != -1:
                         label = str(menu.entrycget(item, 'label'))
                         if underline < len(label):

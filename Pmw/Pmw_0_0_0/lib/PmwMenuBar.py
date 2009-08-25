@@ -185,7 +185,7 @@ class MenuBar(Pmw.MegaWidget):
             for menuName in self._menuInfo.keys():
                 if self._menuInfo[menuName][0] is None:
                     menubutton = self.component(menuName + '-button')
-                    underline = string.atoi(str(menubutton.cget('underline')))
+                    underline = int(str(menubutton.cget('underline')))
                     if underline != -1:
                         label = str(menubutton.cget(textKey))
                         if underline < len(label):
@@ -198,7 +198,7 @@ class MenuBar(Pmw.MegaWidget):
             if end is not None:
                 for item in range(end + 1):
                     if menu.type(item) not in ('separator', 'tearoff'):
-                        underline = string.atoi(
+                        underline = int(
                             str(menu.entrycget(item, 'underline')))
                         if underline != -1:
                             label = str(menu.entrycget(item, textKey))

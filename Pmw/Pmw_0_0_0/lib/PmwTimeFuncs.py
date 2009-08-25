@@ -17,9 +17,9 @@ def timestringtoseconds(text, separator = ':'):
   if re.search('[^0-9]', string.join(inputList, '')) is not None:
     raise ValueError, 'invalid value: ' + text
 
-  hour = string.atoi(inputList[0])
-  minute = string.atoi(inputList[1])
-  second = string.atoi(inputList[2])
+  hour = int(inputList[0])
+  minute = int(inputList[1])
+  second = int(inputList[2])
 
   if minute >= 60 or second >= 60:
     raise ValueError, 'invalid value: ' + text
@@ -45,9 +45,9 @@ def datestringtojdn(text, format = 'ymd', separator = '/'):
   if re.search('[^0-9]', string.join(inputList, '')) is not None:
     raise ValueError, 'invalid value: ' + text
   formatList = list(format)
-  day = string.atoi(inputList[formatList.index('d')])
-  month = string.atoi(inputList[formatList.index('m')])
-  year = string.atoi(inputList[formatList.index('y')])
+  day = int(inputList[formatList.index('d')])
+  month = int(inputList[formatList.index('m')])
+  year = int(inputList[formatList.index('y')])
 
   if _year_pivot is not None:
     if year >= 0 and year < 100:

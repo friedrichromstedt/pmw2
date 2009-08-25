@@ -259,8 +259,8 @@ class TimeCounter(Pmw.MegaWidget):
                 self._upSecondArrowBtn,
                 self._downHourArrowBtn,
                 self._downMinuteArrowBtn, self._downSecondArrowBtn):
-            bw = (string.atoi(btn['borderwidth']) +
-                    string.atoi(btn['highlightthickness']))
+            bw = (int(btn['borderwidth']) +
+                    int(btn['highlightthickness']))
             newHeight = self._hourCounterEntry.winfo_reqheight() - 2 * bw
             newWidth = int(newHeight * self['buttonaspect'])
             btn.configure(width=newWidth, height=newHeight)
@@ -288,9 +288,9 @@ class TimeCounter(Pmw.MegaWidget):
         if len(list) != 3:
             raise ValueError, 'invalid value: ' + text
 
-        self._hour = string.atoi(list[0])
-        self._minute = string.atoi(list[1])
-        self._second = string.atoi(list[2]) 
+        self._hour = int(list[0])
+        self._minute = int(list[1])
+        self._second = int(list[2]) 
 
         self._setHMS()
 
@@ -325,9 +325,9 @@ class TimeCounter(Pmw.MegaWidget):
           if self._flag == 'stopped':
             return
 
-        value = (string.atoi(self._hourCounterEntry.get()) *3600) + \
-              (string.atoi(self._minuteCounterEntry.get()) *60) + \
-              string.atoi(self._secondCounterEntry.get()) + \
+        value = (int(self._hourCounterEntry.get()) *3600) + \
+              (int(self._minuteCounterEntry.get()) *60) + \
+              int(self._secondCounterEntry.get()) + \
               factor * increment
         min = self._minVal
         max = self._maxVal

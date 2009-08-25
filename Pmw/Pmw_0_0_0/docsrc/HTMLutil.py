@@ -214,7 +214,7 @@ def parse_ncsa_line(line):
     elif shape == 'circ':
         [x1, y1] = string.split(line_elements[2], ',')
         [x2, y2] = string.split(line_elements[3], ',')
-        [x1,y1,x2,y2] = map(string.atoi, [x1,y1,x2,y2])
+        [x1,y1,x2,y2] = map(int, [x1,y1,x2,y2])
         r = (x2-x1)/2
         x0 = r + x1 
         y0 = r + y1 
@@ -548,7 +548,7 @@ def test_driver():
     answer = raw_input('Type numbers separated by commas: ')
     if answer:
         try:
-            answers = map(string.atoi, map(string.strip, string.split(answer, ',')))
+            answers = map(int, map(string.strip, string.split(answer, ',')))
             for item in answers:
                 things2test[item-1][1]()
         except (ValueError, IndexError):

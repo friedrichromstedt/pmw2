@@ -197,9 +197,9 @@ def name2rgb(root, colorName, asInt = 0):
         digits = len(colorName) / 3
         factor = 16 ** (4 - digits)
         rgb = (
-            string.atoi(colorName[0:digits], 16) * factor,
-            string.atoi(colorName[digits:digits * 2], 16) * factor,
-            string.atoi(colorName[digits * 2:digits * 3], 16) * factor,
+            int(colorName[0:digits], 16) * factor,
+            int(colorName[digits:digits * 2], 16) * factor,
+            int(colorName[digits * 2:digits * 3], 16) * factor,
         )
     else:
         # We have no choice but to ask Tk what the rgb values are.

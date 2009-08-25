@@ -434,8 +434,8 @@ def memoryleak2_test():
             # if string.find(line, 'python1.5.2') > 0:
             if string.find(line, '^ *%d' % pid) > 0:
                 break
-        # size = string.atoi(string.lstrip(line[27:32]))
-        size = string.atoi(string.lstrip(line[22:29]))
+        # size = int(string.lstrip(line[27:32]))
+        size = int(string.lstrip(line[22:29]))
         if prevSize != size:
             print time.strftime('%H:%M:%S', time.localtime(time.time())),
             print line[:-1]

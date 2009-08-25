@@ -330,10 +330,10 @@ class FullTimeCounter(Pmw.MegaWidget):
 
 	fg = self._yearCounterEntry.cget('entry_foreground')
 
-	bw = (string.atoi(arrow['borderwidth']) +
-		string.atoi(arrow['highlightthickness'])) / 2
-	h = string.atoi(arrow['height']) + 2 * bw
-	w =  string.atoi(arrow['width']) + 2 * bw
+	bw = (int(arrow['borderwidth']) +
+		int(arrow['highlightthickness'])) / 2
+	h = int(arrow['height']) + 2 * bw
+	w =  int(arrow['width']) + 2 * bw
 
 	if direction == 0:
     	     # down arrow
@@ -355,8 +355,8 @@ class FullTimeCounter(Pmw.MegaWidget):
 		    self._upMinuteArrowBtn, self._downYearArrowBtn,
 		    self._downMonthArrowBtn, self._downDayArrowBtn,
 		    self._downHourArrowBtn, self._downMinuteArrowBtn):
-	    bw = (string.atoi(btn['borderwidth']) + \
-		    string.atoi(btn['highlightthickness']))
+	    bw = (int(btn['borderwidth']) + \
+		    int(btn['highlightthickness']))
 	    newHeight = self._yearCounterEntry.winfo_reqheight() - 2 * bw
 	    newWidth = newHeight * self['buttonaspect']
 	    btn.configure(width=newWidth, height=newHeight)
@@ -373,11 +373,11 @@ class FullTimeCounter(Pmw.MegaWidget):
 	if len(list) != 5:
 	    raise ValueError, 'invalid value: ' + str
 
-	self._year = string.atoi(list[0])
-	self._month = string.atoi(list[1])
-	self._day = string.atoi(list[2])
-	self._hour = string.atoi(list[3])
-	self._minute = string.atoi(list[4])
+	self._year = int(list[0])
+	self._month = int(list[1])
+	self._day = int(list[2])
+	self._hour = int(list[3])
+	self._minute = int(list[4])
 
     	self._setHMS()
 

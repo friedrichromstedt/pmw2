@@ -104,7 +104,7 @@ class Demo:
 
     def execute(self):
 	try:
-	    numColors = string.atoi(self.numColors.get())
+	    numColors = int(self.numColors.get())
 	    correction = string.atof(self.correction.get())
 	    saturation = string.atof(self.saturation.get())
 	    intensity = string.atof(self.intensity.get())

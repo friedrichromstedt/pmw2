@@ -127,8 +127,8 @@ class Counter(Pmw.MegaWidget):
 
     def _resizeArrow(self, event):
         for btn in (self._upArrowBtn, self._downArrowBtn):
-            bw = (string.atoi(btn['borderwidth']) +
-                    string.atoi(btn['highlightthickness']))
+            bw = (int(btn['borderwidth']) +
+                    int(btn['highlightthickness']))
             newHeight = self._counterEntry.winfo_reqheight() - 2 * bw
             newWidth = int(newHeight * self['buttonaspect'])
             btn.configure(width=newWidth, height=newHeight)

@@ -62,7 +62,7 @@ def _dateconv(text, output = 0):
 	if text[-1] == '+' or text[-1] == '-':
 	    text = text[:-1]
 	if text[0] == '+' or text[0] == '-':
-            secondsAhead = string.atoi(text) * 3600 * 24
+            secondsAhead = int(text) * 3600 * 24
 	    return time.strftime('%d.%m.%Y',
                     time.localtime(time.time() + secondsAhead))
 	try:

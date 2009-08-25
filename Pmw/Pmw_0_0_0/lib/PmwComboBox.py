@@ -234,7 +234,7 @@ class ComboBox(Pmw.MegaWidget):
         if len(cursels) == 0:
             index = 0
         else:
-            index = string.atoi(cursels[0])
+            index = int(cursels[0])
             if index == size - 1:
                 index = 0
             else:
@@ -252,7 +252,7 @@ class ComboBox(Pmw.MegaWidget):
         if len(cursels) == 0:
             index = size - 1
         else:
-            index = string.atoi(cursels[0])
+            index = int(cursels[0])
             if index == 0:
                 index = size - 1
             else:
@@ -347,8 +347,8 @@ class ComboBox(Pmw.MegaWidget):
         self._ignoreRelease = 0
 
     def _resizeArrow(self, event):
-        bw = (string.atoi(self._arrowBtn['borderwidth']) + 
-            string.atoi(self._arrowBtn['highlightthickness']))
+        bw = (int(self._arrowBtn['borderwidth']) + 
+            int(self._arrowBtn['highlightthickness']))
         newHeight = self._entryfield.winfo_reqheight() - 2 * bw
         newWidth = int(newHeight * self['buttonaspect'])
         self._arrowBtn.configure(width=newWidth, height=newHeight)

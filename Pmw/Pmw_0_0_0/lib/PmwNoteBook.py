@@ -413,8 +413,8 @@ class NoteBook(Pmw.MegaArchetype):
 
         hullWidth, hullHeight = self._canvasSize
         borderWidth = self._borderWidth
-        canvasBorder = string.atoi(self._hull['borderwidth']) + \
-            string.atoi(self._hull['highlightthickness'])
+        canvasBorder = int(self._hull['borderwidth']) + \
+            int(self._hull['highlightthickness'])
         if not self._withTabs:
             self.tabBottom = canvasBorder
         oldTabBottom = self.tabBottom
