@@ -52,7 +52,6 @@ root.update()
 import imp
 import os
 import re
-import string
 import sys
 import types
 import Tkinter
@@ -228,7 +227,7 @@ class Demo(Pmw.MegaWidget):
 	    if re.search('.py$', file) is not None and \
 		    file not in ['All.py', 'DemoVersion.py', 'Args.py']:
 		demoName = file[:-3]
-		index = string.find(demoName, '_')
+		index = demoName.find( '_')
 		if index < 0:
 		    testattr = demoName
 		else:

@@ -1,9 +1,8 @@
-import string
 import Pmw
 
 _default_text = "AlphaExample example alpha Pmw megawidget.\nPmw version: " + \
     Pmw.version() + '\nPmw Alpha versions: ' + \
-    string.join(Pmw.version(alpha = 1), ' ')
+    ' '.join(Pmw.version(alpha = 1)
  
 class AlphaExample(Pmw.MessageDialog):
     # Dummy widget for illustrating use of Pmw alpha version directory

@@ -1,6 +1,5 @@
 # Manager widget for menus.
 
-import string
 import types
 import Tkinter
 import Pmw
@@ -189,7 +188,7 @@ class MenuBar(Pmw.MegaWidget):
                     if underline != -1:
                         label = str(menubutton.cget(textKey))
                         if underline < len(label):
-                            hotkey = string.lower(label[underline])
+                            hotkey = label[underline].lower()
                             if hotkey not in hotkeyList:
                                 hotkeyList.append(hotkey)
         else:
@@ -203,22 +202,21 @@ class MenuBar(Pmw.MegaWidget):
                         if underline != -1:
                             label = str(menu.entrycget(item, textKey))
                             if underline < len(label):
-                                hotkey = string.lower(label[underline])
+                                hotkey = label[underline].lower()
                                 if hotkey not in hotkeyList:
                                     hotkeyList.append(hotkey)
 
         name = kw[textKey]
 
         if type(traverseSpec) == types.StringType:
-            lowerLetter = string.lower(traverseSpec)
+            lowerLetter = traverseSpec.lower()
             if traverseSpec in name and lowerLetter not in hotkeyList:
-                kw['underline'] = string.index(name, traverseSpec)
+                kw['underline'] = name.index( traverseSpec)
         else:
-            targets = string.digits + string.letters
-            lowerName = string.lower(name)
+            lowerName = name.lower()
             for letter_index in range(len(name)):
                 letter = lowerName[letter_index]
-                if letter in targets and letter not in hotkeyList:
+                if (letter.isdigit() or letter.isalpha()) and letter not in hotkeyList:
                     kw['underline'] = letter_index
                     break
 

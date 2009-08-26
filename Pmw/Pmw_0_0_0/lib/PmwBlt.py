@@ -1,7 +1,6 @@
 # Python interface to some of the commands of the 2.4 version of the
 # BLT extension to tcl.
 
-import string
 import types
 import Tkinter
 
@@ -105,7 +104,7 @@ class Vector:
         return self._name
 
     def __repr__(self):
-        return '[' + string.join(map(str, self), ', ') + ']'
+        return '[' + ', '.join(map(str, self)) + ']'
     def __cmp__(self, list):
         return cmp(self[:], list)
 

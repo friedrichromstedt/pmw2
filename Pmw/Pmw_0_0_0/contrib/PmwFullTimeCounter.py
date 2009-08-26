@@ -1,6 +1,5 @@
 # Authors: Joe VanAndel, Greg McFarlane and Daniel Michelson
 
-import string
 import sys
 import time
 import Tkinter
@@ -369,7 +368,7 @@ class FullTimeCounter(Pmw.MegaWidget):
 	self._maxVal = None
 
     def _setTimeFromStr(self, str):
-        list = string.split(str, ':')
+        list = str.split( ':')
 	if len(list) != 5:
 	    raise ValueError, 'invalid value: ' + str
 

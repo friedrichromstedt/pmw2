@@ -4,7 +4,6 @@ title = 'Pmw.Counter demonstration'
 import sys
 sys.path[:0] = ['../../..']
 
-import string
 import time
 import Tkinter
 import Pmw
@@ -87,14 +86,14 @@ class Demo:
 specialword = 'Monti Python ik den Holie Grailen (Bok)'
 
 def _custom_validate(text):
-    if string.find(specialword, text) == 0:
+    if specialword.find( text) == 0:
 	return 1
     else:
 	return -1
 
 def _custom_counter(text, factor, increment):
     # increment is ignored here.
-    if string.find(specialword, text) == 0:
+    if specialword.find( text) == 0:
 	length = len(text)
 	if factor == 1:
 	    if length >= len(specialword):

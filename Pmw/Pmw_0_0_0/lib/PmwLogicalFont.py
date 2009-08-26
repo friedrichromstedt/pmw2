@@ -1,5 +1,4 @@
 import os
-import string
 
 def _font_initialise(root, size=None, fontScheme = None):
     global _fontSize
@@ -63,7 +62,7 @@ def logicalfont(name='Helvetica', sizeIncr = 0, **kw):
 
     rtn.append(realValue)
 
-  return string.join(rtn, '-')
+  return '-'.join(rtn)
 
 def logicalfontnames():
   return _fontInfo.keys()

@@ -65,7 +65,7 @@ text['options']['datatype'] = """
 
     The standard counters are:
 
-    *'numeric'* -- An integer number, as accepted by /string.atol()/.
+    *'numeric'* -- An integer number, as accepted by /int()/.
 
     *'integer'* -- Same as *'numeric'*.
 

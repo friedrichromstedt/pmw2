@@ -1,6 +1,5 @@
 # Authors: Joe VanAndel and Greg McFarlane
 
-import string
 import sys
 import time
 import Tkinter
@@ -284,7 +283,7 @@ class TimeCounter(Pmw.MegaWidget):
         return self.getstring()
 
     def setvalue(self, text):
-        list = string.split(text, ':')
+        list = text.split( ':')
         if len(list) != 3:
             raise ValueError, 'invalid value: ' + text
 

@@ -4,7 +4,6 @@ title = 'Using Tk option database to configure Tk widgets'
 import sys
 sys.path[:0] = ['../../..']
 
-import string
 import Tkinter
 import Pmw
 
@@ -36,7 +35,7 @@ class DemoClass(Pmw.MegaWidget):
 	interior = self.interior()
 	listbox = Tkinter.Listbox(interior, height = 12, width = 40)
 	listbox.pack(fill='both', expand='yes')
-	for line in string.split(info, '\n'):
+	for line in info.split( '\n'):
 	    listbox.insert('end', line)
 
 	entry = Tkinter.Entry(interior)

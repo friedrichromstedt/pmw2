@@ -1,7 +1,6 @@
 # Based on iwidgets2.2.0/entryfield.itk code.
 
 import re
-import string
 import types
 import Tkinter
 import Pmw
@@ -353,7 +352,7 @@ def integervalidator(text):
     if text in ('', '-', '+'):
         return PARTIAL
     try:
-        string.atol(text)
+        int(text)
         return OK
     except ValueError:
         return ERROR
@@ -374,16 +373,16 @@ def hexadecimalvalidator(text):
     if text in ('', '0x', '0X', '+', '+0x', '+0X', '-', '-0x', '-0X'):
         return PARTIAL
     try:
-        string.atol(text, 16)
+        int(text, 16)
         return OK
     except ValueError:
         return ERROR
     
 def realvalidator(text, separator = '.'):
     if separator != '.':
-        if string.find(text, '.') >= 0:
+        if text.find( '.') >= 0:
             return ERROR
-        index = string.find(text, separator)
+        index = text.find( separator)
         if index >= 0:
             text = text[:index] + '.' + text[index + 1:]
     try:
@@ -394,7 +393,7 @@ def realvalidator(text, separator = '.'):
         # eg ('-', '+', '.', '-.', '+.', '1.23e', '1E-').
         if len(text) == 0:
             return PARTIAL
-        if text[-1] in string.digits:
+        if text[-1].isdigit():
             return ERROR
         try:
             float(text + '0')
@@ -423,9 +422,9 @@ def datevalidator(text, format = 'ymd', separator = '/'):
         return PARTIAL
 
 _standardValidators = {
-    'numeric'      : (numericvalidator,      string.atol),
-    'integer'      : (integervalidator,      string.atol),
-    'hexadecimal'  : (hexadecimalvalidator,  lambda s: string.atol(s, 16)),
+    'numeric'      : (numericvalidator,      int),
+    'integer'      : (integervalidator,      int),
+    'hexadecimal'  : (hexadecimalvalidator,  lambda s: int(s, 16)),
     'real'         : (realvalidator,         Pmw.stringtoreal),
     'alphabetic'   : (alphabeticvalidator,   len),
     'alphanumeric' : (alphanumericvalidator, len),

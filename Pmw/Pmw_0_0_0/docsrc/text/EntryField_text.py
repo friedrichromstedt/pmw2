@@ -133,10 +133,10 @@ text['options']['validate'] = """
 	only. No sign.
 
     *'integer'* -- Any integer (negative, 0 or positive) as accepted
-	by /string.atol()/.
+	by /int()/.
 
     *'hexadecimal'* -- Hex number (with optional leading *'0x'*), as accepted
-	by /string.atol(text, 16)/.
+	by /int(text, 16)/.
 
     *'real'* -- A number, with or without a decimal point and optional
 	exponent (e or E), as accepted by /float()/.  This

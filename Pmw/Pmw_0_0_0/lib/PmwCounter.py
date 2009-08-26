@@ -1,4 +1,4 @@
-import string
+
 import sys
 import types
 import Tkinter
@@ -273,7 +273,7 @@ class Counter(Pmw.MegaWidget):
 Pmw.forwardmethods(Counter, Pmw.EntryField, '_counterEntry')
 
 def _changeNumber(text, factor, increment):
-  value = string.atol(text)
+  value = int(text)
   if factor > 0:
     value = (value / increment) * increment + increment
   else:
@@ -309,7 +309,7 @@ def _changeReal(text, factor, increment, separator = '.'):
 
   text = str(value)
   if separator != '.':
-      index = string.find(text, '.')
+      index = text.find( '.')
       if index >= 0:
         text = text[:index] + separator + text[index + 1:]
   return text

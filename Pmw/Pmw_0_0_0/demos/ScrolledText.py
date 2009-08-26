@@ -6,7 +6,6 @@ sys.path[:0] = ['../../..']
 
 import os
 import math
-import string
 import Tkinter
 import Pmw
 
@@ -40,7 +39,7 @@ class Demo:
 	self.st.pack(padx = 5, pady = 5, fill = 'both', expand = 1)
 
         funcs = 'atan cos cosh exp log log10 sin sinh sqrt tan tanh'
-        funcs = string.split(funcs)
+        funcs = funcs.split()
 
         # Create the header for the row headers
         self.st.component('rowcolumnheader').insert('end', 'x')

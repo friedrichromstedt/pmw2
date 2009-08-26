@@ -4,7 +4,6 @@ title = 'Subclassing Pmw.EntryField'
 import sys
 sys.path[:0] = ['../../..']
 
-import string
 import time
 import types
 import Tkinter
@@ -54,7 +53,7 @@ def _dateconv(text, output = 0):
 	return ''
     if output:
 	try:
-	    d = string.split(text, '.')
+	    d = text.split( '.')
 	    return d[1] + '-' + d[0] + '-' + d[2]
 	except:
 	    return text
@@ -66,7 +65,7 @@ def _dateconv(text, output = 0):
 	    return time.strftime('%d.%m.%Y',
                     time.localtime(time.time() + secondsAhead))
 	try:
-	    d = string.split(text,'-')
+	    d = text.split('-')
 	    return d[1] + '.' + d[0] + '.' + d[2]
 	except:
 	    return text
@@ -75,13 +74,13 @@ def _realconv(text, output = 0):
     # Convert between DD.DD and DD,DD.
 
     if output:
-	index = string.find(text, ',')
+	index = text.find( ',')
 	if index >= 0:
 	    return text[:index] + '.' + text[index + 1:]
 	else:
 	    return text
     else:
-	index = string.find(text, '.')
+	index = text.find( '.')
 	if index >= 0:
 	    return text[:index] + ',' + text[index + 1:]
 	else:
