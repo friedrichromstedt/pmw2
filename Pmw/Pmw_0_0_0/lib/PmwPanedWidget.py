@@ -1,7 +1,6 @@
 # PanedWidget
 # a frame which may contain several resizable sub-frames
 
-import string
 import sys
 import types
 import Tkinter

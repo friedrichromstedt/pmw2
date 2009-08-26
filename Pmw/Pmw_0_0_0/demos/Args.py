@@ -5,7 +5,6 @@ to the program on the command line.
 """
 
 import types
-import string
 import sys
 
 # Symbolic constants for the indexes into an argument specifier tuple.

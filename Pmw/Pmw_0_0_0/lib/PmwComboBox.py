@@ -1,7 +1,6 @@
 # Based on iwidgets2.2.0/combobox.itk code.
 
 import os
-import string
 import types
 import Tkinter
 import Pmw

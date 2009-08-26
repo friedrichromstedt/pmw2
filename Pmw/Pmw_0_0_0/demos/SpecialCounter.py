@@ -4,7 +4,6 @@ title = 'Subclassing Pmw.Counter'
 import sys
 sys.path[:0] = ['../../..']
 
-import string
 import time
 import types
 import Tkinter

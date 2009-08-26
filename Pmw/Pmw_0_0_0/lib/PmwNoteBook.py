@@ -1,4 +1,4 @@
-import string
+
 import types
 import Tkinter
 import Pmw

@@ -26,7 +26,6 @@
 #  675 Mass Ave, Cambridge, MA 02139, USA.
 #
 
-import string
 import Tkinter
 import Pmw
 

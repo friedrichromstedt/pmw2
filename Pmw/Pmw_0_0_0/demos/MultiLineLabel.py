@@ -4,7 +4,6 @@ title = 'Multi-line label demonstration'
 import sys
 sys.path[:0] = ['../../..']
 
-import string
 import Tkinter
 import Pmw
 

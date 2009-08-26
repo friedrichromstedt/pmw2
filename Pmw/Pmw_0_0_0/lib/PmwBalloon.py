@@ -1,5 +1,4 @@
 import os
-import string
 import Tkinter
 import Pmw
 
