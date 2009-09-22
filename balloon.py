@@ -1,8 +1,8 @@
 import os
 import Tkinter
-import Pmw
+import pmw2.base
 
-class Balloon(Pmw.MegaToplevel):
+class Balloon(pmw2.base.MegaToplevel):
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
@@ -23,7 +23,7 @@ class Balloon(Pmw.MegaToplevel):
         self.defineoptions(kw, optiondefs)
 
         # Initialise the base class (after defining the options).
-        Pmw.MegaToplevel.__init__(self, parent)
+        pmw2.base.MegaToplevel.__init__(self, parent)
 
         self.withdraw()
         self.overrideredirect(1)

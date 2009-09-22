@@ -1,7 +1,7 @@
-import Pmw
+import pmw2.message_dialog
 
-class AboutDialog(Pmw.MessageDialog):
-    # Window to display version and contact information.
+class AboutDialog(pmw2.message_dialog.MessageDialog):
+    """Window to display version and contact information."""
 
     # Class members containing resettable 'default' values:
     _version = ''
@@ -11,7 +11,7 @@ class AboutDialog(Pmw.MessageDialog):
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.INITOPT
         optiondefs = (
             ('applicationname',   '',          INITOPT),
             ('iconpos',           'w',         None),
@@ -22,7 +22,7 @@ class AboutDialog(Pmw.MessageDialog):
         self.defineoptions(kw, optiondefs)
 
         # Initialise the base class (after defining the options).
-        Pmw.MessageDialog.__init__(self, parent)
+        pmw2.message_dialog.MessageDialog.__init__(self, parent)
 
         applicationname = self['applicationname']
         if 'title' not in kw:
