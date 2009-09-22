@@ -1,8 +1,10 @@
 # Not Based on iwidgets version.
 
-import Pmw
+import pmw2.base
+import pmw2.dialog
+import pmw2.scrolled_list_box
 
-class SelectionDialog(Pmw.Dialog):
+class SelectionDialog(pmw2.dialog.Dialog):
     # Dialog window with selection list.
     
     # Dialog window displaying a list and requesting the user to
@@ -10,7 +12,7 @@ class SelectionDialog(Pmw.Dialog):
 
     def __init__(self, parent = None, **kw):
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('borderx',     10,    INITOPT),
             ('bordery',     10,    INITOPT),
@@ -18,7 +20,7 @@ class SelectionDialog(Pmw.Dialog):
         self.defineoptions(kw, optiondefs)
 
         # Initialise the base class (after defining the options).
-        Pmw.Dialog.__init__(self, parent)
+        pmw2.dialog.Dialog.__init__(self, parent)
 
         # Create the components.
         interior = self.interior()
@@ -28,7 +30,7 @@ class SelectionDialog(Pmw.Dialog):
         )
         self._list = self.createcomponent('scrolledlist',
                 aliases, None,
-                Pmw.ScrolledListBox, (interior,),
+                pmw.scrolled_list_box.ScrolledListBox, (interior,),
                 dblclickcommand = self.invoke)
         self._list.pack(side='top', expand='true', fill='both',
                 padx = self['borderx'], pady = self['bordery'])
@@ -52,4 +54,4 @@ class SelectionDialog(Pmw.Dialog):
     def bbox(self, index):
         return self.component('listbox').size(index)
 
-Pmw.forwardmethods(SelectionDialog, Pmw.ScrolledListBox, '_list')
+pmw2.base.forwardmethods(SelectionDialog, Pmw.ScrolledListBox, '_list')

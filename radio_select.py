@@ -1,8 +1,8 @@
 import types
 import Tkinter
-import Pmw
+import pmw2.base
 
-class RadioSelect(Pmw.MegaWidget):
+class RadioSelect(pmw2.base.MegaWidget):
     # A collection of several buttons.  In single mode, only one
     # button may be selected.  In multiple mode, any number of buttons
     # may be selected.
@@ -10,7 +10,7 @@ class RadioSelect(Pmw.MegaWidget):
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('buttontype',    'button',      INITOPT),
             ('command',       None,          None),
@@ -24,7 +24,7 @@ class RadioSelect(Pmw.MegaWidget):
         self.defineoptions(kw, optiondefs, dynamicGroups = ('Button',))
 
         # Initialise the base class (after defining the options).
-        Pmw.MegaWidget.__init__(self, parent)
+        pmw2.base.MegaWidget.__init__(self, parent)
 
         # Create the components.
         interior = self.interior()
@@ -122,7 +122,7 @@ class RadioSelect(Pmw.MegaWidget):
                 return index
             else:
                 raise ValueError, 'index "%s" is out of range' % index
-        elif index is Pmw.END:
+        elif index is pmw2.base.END:
             if listLength > 0:
                 return listLength - 1
             else:
@@ -132,7 +132,7 @@ class RadioSelect(Pmw.MegaWidget):
                 name = self._buttonList[count]
                 if index == name:
                     return count
-            validValues = 'a name, a number or Pmw.END'
+            validValues = 'a name, a number or pmw2.base.END'
             raise ValueError, \
                     'bad index "%s": must be %s' % (index, validValues)
 

@@ -1,13 +1,15 @@
-import Pmw
+import pmw2.base
+import pmw2.dialog
+import pmw2.counter
 
 # A Dialog with a counter
 
-class CounterDialog(Pmw.Dialog):
+class CounterDialog(pmw2.dialog.Dialog):
 
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('borderx',    20,  INITOPT),
             ('bordery',    20,  INITOPT),
@@ -15,7 +17,7 @@ class CounterDialog(Pmw.Dialog):
         self.defineoptions(kw, optiondefs)
 
         # Initialise the base class (after defining the options).
-        Pmw.Dialog.__init__(self, parent)
+        pmw2.dialog.Dialog.__init__(self, parent)
 
         # Create the components.
         interior = self.interior()
@@ -28,7 +30,7 @@ class CounterDialog(Pmw.Dialog):
         )
         self._cdCounter = self.createcomponent('counter',
                 aliases, None,
-                Pmw.Counter, (interior,))
+                pmw2.counter.Counter, (interior,))
         self._cdCounter.pack(fill='x', expand=1,
                 padx = self['borderx'], pady = self['bordery'])
         
@@ -51,4 +53,4 @@ class CounterDialog(Pmw.Dialog):
     def indexentry(self, index):
         return self._cdCounter.index(index)
 
-Pmw.forwardmethods(CounterDialog, Pmw.Counter, '_cdCounter')
+pmw2.base.forwardmethods(CounterDialog, Pmw.Counter, '_cdCounter')

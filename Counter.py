@@ -2,14 +2,16 @@
 import sys
 import types
 import Tkinter
-import Pmw
+import pmw2.base
+import pmw2.entry_field
+import pmw2.time_funcs
 
-class Counter(Pmw.MegaWidget):
+class Counter(pmw2.base.MegaWidget):
 
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('autorepeat',     1,             None),
             ('buttonaspect',   1.0,           INITOPT),
@@ -27,7 +29,7 @@ class Counter(Pmw.MegaWidget):
         self.defineoptions(kw, optiondefs)
 
         # Initialise the base class (after defining the options).
-        Pmw.MegaWidget.__init__(self, parent)
+        pmw2.base.MegaWidget.__init__(self, parent)
 
         # Initialise instance variables.
         self._timerId = None
@@ -64,7 +66,7 @@ class Counter(Pmw.MegaWidget):
         # Create the entry field.
         self._counterEntry = self.createcomponent('entryfield',
                 (('entry', 'entryfield_entry'),), None,
-                Pmw.EntryField, (frame,))
+                pmw2.entry_field.EntryField, (frame,))
 
         # Create the up arrow.
         self._upArrowBtn = self.createcomponent('uparrow',
@@ -151,7 +153,7 @@ class Counter(Pmw.MegaWidget):
                 direction = 'right'
             else:
                 direction = 'left'
-        Pmw.drawarrow(arrow, self['entry_foreground'], direction, 'arrow')
+        pmw2.base.drawarrow(arrow, self['entry_foreground'], direction, 'arrow')
 
     def _stopCounting(self, event = None):
         if self._timerId is not None:
@@ -226,7 +228,7 @@ class Counter(Pmw.MegaWidget):
             return
 
         previousICursor = self._counterEntry.index('insert')
-        if self._counterEntry.setentry(value) == Pmw.OK:
+        if self._counterEntry.setentry(value) == pmw2.base.OK:
             self._counterEntry.xview('end')
             self._counterEntry.icursor(previousICursor)
 
@@ -249,10 +251,10 @@ class Counter(Pmw.MegaWidget):
         # text and stop counting.
         previousICursor = self._counterEntry.index('insert')
         valid = self._counterEntry.setentry(value)
-        if valid != Pmw.OK:
+        if valid != pmw2.base.OK:
             self._stopCounting()
             self._counterEntry.setentry(origtext)
-            if valid == Pmw.PARTIAL:
+            if valid == pmw2.entry_field.PARTIAL:
                 self.bell()
             return
         self._counterEntry.xview('end')
@@ -268,9 +270,9 @@ class Counter(Pmw.MegaWidget):
 
     def destroy(self):
         self._stopCounting()
-        Pmw.MegaWidget.destroy(self)
+        pmw2.base.MegaWidget.destroy(self)
 
-Pmw.forwardmethods(Counter, Pmw.EntryField, '_counterEntry')
+pmw2.base.forwardmethods(Counter, pmw2.entry_field.EntryField, '_counterEntry')
 
 def _changeNumber(text, factor, increment):
   value = int(text)
@@ -287,7 +289,7 @@ def _changeNumber(text, factor, increment):
       return rtn
 
 def _changeReal(text, factor, increment, separator = '.'):
-  value = Pmw.stringtoreal(text, separator)
+  value = pmw2.time_funcs.stringtoreal(text, separator)
   div = value / increment
 
   # Compare reals using str() to avoid problems caused by binary
@@ -317,9 +319,9 @@ def _changeReal(text, factor, increment, separator = '.'):
 def _changeDate(value, factor, increment, format = 'ymd',
         separator = '/', yyyy = 0):
 
-  jdn = Pmw.datestringtojdn(value, format, separator) + factor * increment
+  jdn = pmw2.time_funcs.datestringtojdn(value, format, separator) + factor * increment
 
-  y, m, d = Pmw.jdntoymd(jdn)
+  y, m, d = pmw2.time_funcs.jdntoymd(jdn)
   result = ''
   for index in range(3):
     if index > 0:
@@ -339,7 +341,7 @@ def _changeDate(value, factor, increment, format = 'ymd',
 
 _SECSPERDAY = 24 * 60 * 60
 def _changeTime(value, factor, increment, separator = ':', time24 = 0):
-  unixTime = Pmw.timestringtoseconds(value, separator)
+  unixTime = pmw2.time_funcs.timestringtoseconds(value, separator)
   if factor > 0:
     chunks = unixTime / increment + 1
   else:

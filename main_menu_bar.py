@@ -2,14 +2,14 @@
 
 import types
 import Tkinter
-import Pmw
+import pmw2.base
 
-class MainMenuBar(Pmw.MegaArchetype):
+class MainMenuBar(pmw2.base.MegaArchetype):
 
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('balloon',      None,       None),
             ('hotkeys',      1,          INITOPT),
@@ -18,7 +18,7 @@ class MainMenuBar(Pmw.MegaArchetype):
         self.defineoptions(kw, optiondefs, dynamicGroups = ('Menu',))
 
         # Initialise the base class (after defining the options).
-        Pmw.MegaArchetype.__init__(self, parent, Tkinter.Menu)
+        pmw2.base.MegaArchetype.__init__(self, parent, Tkinter.Menu)
 
         self._menuInfo = {}
         self._menuInfo[None] = (None, [])
@@ -220,4 +220,4 @@ class MainMenuBar(Pmw.MegaArchetype):
         if balloon is not None:
             balloon.clearstatus()
 
-Pmw.forwardmethods(MainMenuBar, Tkinter.Menu, '_hull')
+pmw2.base.forwardmethods(MainMenuBar, Tkinter.Menu, '_hull')

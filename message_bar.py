@@ -1,13 +1,13 @@
 # Class to display messages in an information line.
 
 import Tkinter
-import Pmw
+import pmw2.base
 
-class MessageBar(Pmw.MegaWidget):
+class MessageBar(pmw2.base.MegaWidget):
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         defaultMessageTypes = {
                            # (priority, showtime, bells, logmessage)
             'systemerror'  : (5, 10, 2, 1),
@@ -28,7 +28,7 @@ class MessageBar(Pmw.MegaWidget):
         self.defineoptions(kw, optiondefs)
 
         # Initialise the base class (after defining the options).
-        Pmw.MegaWidget.__init__(self, parent)
+        pmw2.base.MegaWidget.__init__(self, parent)
 
         # Create the components.
         interior = self.interior()
@@ -67,7 +67,7 @@ class MessageBar(Pmw.MegaWidget):
             if timerId is not None:
                 self.after_cancel(timerId)
         self._timer = [None] * self._numPriorities
-        Pmw.MegaWidget.destroy(self)
+        pmw2.base.MegaWidget.destroy(self)
 
     def message(self, type, text):
         # Display a message in the message bar.
@@ -139,4 +139,4 @@ class MessageBar(Pmw.MegaWidget):
         except Tkinter.TclError:
             self._messageBarEntry.configure(state = 'disabled')
 
-Pmw.forwardmethods(MessageBar, Tkinter.Entry, '_messageBarEntry')
+pmw2.base.forwardmethods(MessageBar, Tkinter.Entry, '_messageBarEntry')

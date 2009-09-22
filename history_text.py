@@ -1,10 +1,10 @@
-import Pmw
+import pmw2.scrolled_text
 
 _ORIGINAL = 0
 _MODIFIED = 1
 _DISPLAY = 2
 
-class HistoryText(Pmw.ScrolledText):
+class HistoryText(pmw2.scrolled_text.ScrolledText):
 
     def __init__(self, parent = None, **kw):
 
@@ -17,7 +17,7 @@ class HistoryText(Pmw.ScrolledText):
         self.defineoptions(kw, optiondefs)
 
         # Initialise the base class (after defining the options).
-        Pmw.ScrolledText.__init__(self, parent)
+        pmw.scrolled_text.ScrolledText.__init__(self, parent)
 
         # Initialise instance variables.
         self._list = []

@@ -1,14 +1,14 @@
 import types
 import Tkinter
-import Pmw
 import sys
+import pmw2.base
 
-class OptionMenu(Pmw.MegaWidget):
+class OptionMenu(pmw2.base.MegaWidget):
 
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('command',        None,       None),
             ('items',          (),         INITOPT),
@@ -20,7 +20,7 @@ class OptionMenu(Pmw.MegaWidget):
         self.defineoptions(kw, optiondefs)
 
         # Initialise the base class (after defining the options).
-        Pmw.MegaWidget.__init__(self, parent)
+        pmw2.base.MegaWidget.__init__(self, parent)
 
         # Create the components.
         interior = self.interior()
@@ -122,13 +122,13 @@ class OptionMenu(Pmw.MegaWidget):
                 return index
             else:
                 raise ValueError, 'index "%s" is out of range' % index
-        elif index is Pmw.END:
+        elif index is pmw2.base.END:
             if listLength > 0:
                 return listLength - 1
             else:
                 raise ValueError, 'OptionMenu has no items'
         else:
-            if index is Pmw.SELECT:
+            if index is pmw2.base.SELECT:
                 if listLength > 0:
                     index = self.getcurselection()
                 else:
@@ -137,9 +137,9 @@ class OptionMenu(Pmw.MegaWidget):
                 return self._itemList.index(index)
             raise ValueError, \
                     'bad index "%s": must be a ' \
-                    'name, a number, Pmw.END or Pmw.SELECT' % (index,)
+                    'name, a number, pmw2.base.END or pmw2.base.SELECT' % (index,)
 
-    def invoke(self, index = Pmw.SELECT):
+    def invoke(self, index = pmw2.base.SELECT):
         index = self.index(index)
         text = self._itemList[index]
 

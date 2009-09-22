@@ -4,14 +4,14 @@
 import sys
 import types
 import Tkinter
-import Pmw
+import pmw2.base
 
-class PanedWidget(Pmw.MegaWidget):
+class PanedWidget(pmw2.base.MegaWidget):
 
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('command',            None,         None),
             ('orient',             'vertical',   INITOPT),
@@ -25,7 +25,7 @@ class PanedWidget(Pmw.MegaWidget):
                 dynamicGroups = ('Frame', 'Separator', 'Handle'))
 
         # Initialise the base class (after defining the options).
-        Pmw.MegaWidget.__init__(self, parent)
+        pmw2.base.MegaWidget.__init__(self, parent)
 
         self.bind('<Configure>', self._handleConfigure)
 
@@ -562,7 +562,7 @@ class PanedWidget(Pmw.MegaWidget):
         if self._timerId is not None:
           self.after_cancel(self._timerId)
           self._timerId = None
-        Pmw.MegaWidget.destroy(self)
+        pmw2.base.MegaWidget.destroy(self)
 
     def _btnMoveCompressed(self, item):
         if not self._buttonIsDown:

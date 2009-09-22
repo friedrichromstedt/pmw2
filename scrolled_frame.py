@@ -1,13 +1,13 @@
 
 import types
 import Tkinter
-import Pmw
+import pmw2.base
 
-class ScrolledFrame(Pmw.MegaWidget):
+class ScrolledFrame(pmw2.base.MegaWidget):
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('borderframe',    1,            INITOPT),
             ('horizflex',      'fixed',      self._horizflex),
@@ -24,10 +24,10 @@ class ScrolledFrame(Pmw.MegaWidget):
         self.defineoptions(kw, optiondefs)
 
         # Initialise the base class (after defining the options).
-        Pmw.MegaWidget.__init__(self, parent)
+        pmw2.base.MegaWidget.__init__(self, parent)
 
         # Create the components.
-        self.origInterior = Pmw.MegaWidget.interior(self)
+        self.origInterior = pmw2.base.MegaWidget.interior(self)
 
         if self['usehullsize']:
             self.origInterior.grid_propagate(0)
@@ -111,7 +111,7 @@ class ScrolledFrame(Pmw.MegaWidget):
         # Work around a bug in Tk where the value returned by the
         # scrollbar get() method is (0.0, 0.0, 0.0, 0.0) rather than
         # the expected 2-tuple.  This occurs if xview() is called soon
-        # after the Pmw.ScrolledFrame has been created.
+        # after the pmw2.scrolled_frame.ScrolledFrame has been created.
         self._horizScrollbar.set(0.0, 1.0)
         self._vertScrollbar.set(0.0, 1.0)
 
@@ -122,7 +122,7 @@ class ScrolledFrame(Pmw.MegaWidget):
         if self.scrollTimer is not None:
             self.after_cancel(self.scrollTimer)
             self.scrollTimer = None
-        Pmw.MegaWidget.destroy(self)
+        pmw2.base.MegaWidget.destroy(self)
 
     # ======================================================================
 

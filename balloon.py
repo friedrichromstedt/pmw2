@@ -60,7 +60,7 @@ class Balloon(pmw2.base.MegaToplevel):
         if self._timer is not None:
             self.after_cancel(self._timer)
             self._timer = None
-        Pmw.MegaToplevel.destroy(self)
+        pmw2.base.MegaToplevel.destroy(self)
 
     def bind(self, widget, balloonHelp, statusHelp = None):
 
@@ -361,4 +361,4 @@ class Balloon(pmw2.base.MegaToplevel):
                 y = toprel + widget.winfo_rooty()
             y = y - self._label.winfo_reqheight() - self['yoffset'] - edges
 
-        Pmw.setgeometryanddeiconify(self, '+%d+%d' % (x, y))
+        pmw2.base.setgeometryanddeiconify(self, '+%d+%d' % (x, y))

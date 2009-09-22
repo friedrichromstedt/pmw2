@@ -1,11 +1,11 @@
 import Tkinter
-import Pmw
+import pmw2.base
 
-class ScrolledField(Pmw.MegaWidget):
+class ScrolledField(pmw2.base.MegaWidget):
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('labelmargin',   0,      INITOPT),
             ('labelpos',      None,   INITOPT),
@@ -15,7 +15,7 @@ class ScrolledField(Pmw.MegaWidget):
         self.defineoptions(kw, optiondefs)
 
         # Initialise the base class (after defining the options).
-        Pmw.MegaWidget.__init__(self, parent)
+        pmw2.base.MegaWidget.__init__(self, parent)
 
         # Create the components.
         interior = self.interior()
@@ -50,4 +50,4 @@ class ScrolledField(Pmw.MegaWidget):
         except Tkinter.TclError:
             self._scrolledFieldEntry.configure(state = 'disabled')
 
-Pmw.forwardmethods(ScrolledField, Tkinter.Entry, '_scrolledFieldEntry')
+pmw2.base.forwardmethods(ScrolledField, Tkinter.Entry, '_scrolledFieldEntry')

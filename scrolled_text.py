@@ -1,13 +1,13 @@
 # Based on iwidgets2.2.0/scrolledtext.itk code.   
 
 import Tkinter
-import Pmw
+import pmw2.base
 
-class ScrolledText(Pmw.MegaWidget):
+class ScrolledText(pmw2.base.MegaWidget):
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('borderframe',    0,            INITOPT),
             ('columnheader',   0,            INITOPT),
@@ -23,7 +23,7 @@ class ScrolledText(Pmw.MegaWidget):
         self.defineoptions(kw, optiondefs)
 
         # Initialise the base class (after defining the options).
-        Pmw.MegaWidget.__init__(self, parent)
+        pmw2.base.MegaWidget.__init__(self, parent)
 
         # Create the components.
         interior = self.interior()
@@ -149,7 +149,7 @@ class ScrolledText(Pmw.MegaWidget):
         if self.scrollTimer is not None:
             self.after_cancel(self.scrollTimer)
             self.scrollTimer = None
-        Pmw.MegaWidget.destroy(self)
+        pmw2.base.MegaWidget.destroy(self)
 
     # ======================================================================
 
@@ -440,4 +440,4 @@ class ScrolledText(Pmw.MegaWidget):
     def bbox(self, index):
         return self._textbox.bbox(index)
 
-Pmw.forwardmethods(ScrolledText, Tkinter.Text, '_textbox')
+pmw2.base.forwardmethods(ScrolledText, Tkinter.Text, '_textbox')

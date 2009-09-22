@@ -1,13 +1,14 @@
 # Based on iwidgets2.2.0/promptdialog.itk code.
 
-import Pmw
+import pmw2.dialog
+import pmw2.entry_field
 
 # A Dialog with an entryfield
 
-class PromptDialog(Pmw.Dialog):
+class PromptDialog(pmw2.dialog.Dialog):
     def __init__(self, parent = None, **kw):
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('borderx',     20,    INITOPT),
             ('bordery',     20,    INITOPT),
@@ -15,7 +16,7 @@ class PromptDialog(Pmw.Dialog):
         self.defineoptions(kw, optiondefs)
 
         # Initialise the base class (after defining the options).
-        Pmw.Dialog.__init__(self, parent)
+        pmw2.dialog.Dialog.__init__(self, parent)
 
         # Create the components.
         interior = self.interior()
@@ -25,7 +26,7 @@ class PromptDialog(Pmw.Dialog):
         )
         self._promptDialogEntry = self.createcomponent('entryfield',
                 aliases, None,
-                Pmw.EntryField, (interior,))
+                pmw2.entry_field.EntryField, (interior,))
         self._promptDialogEntry.pack(fill='x', expand=1,
                 padx = self['borderx'], pady = self['bordery'])
         
@@ -48,4 +49,4 @@ class PromptDialog(Pmw.Dialog):
     def indexentry(self, index):
         return self._promptDialogEntry.index(index)
 
-Pmw.forwardmethods(PromptDialog, Pmw.EntryField, '_promptDialogEntry')
+pmw2.base.forwardmethods(PromptDialog, Pmw.EntryField, '_promptDialogEntry')

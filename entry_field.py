@@ -3,20 +3,21 @@
 import re
 import types
 import Tkinter
-import Pmw
+import pmw2.base
+import pmw2.time_funcs
 
 # Possible return values of validation functions.
 OK = 1
 ERROR = 0
 PARTIAL = -1
 
-class EntryField(Pmw.MegaWidget):
+class EntryField(pmw2.base.MegaWidget):
     _classBindingsDefinedFor = 0
 
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('command',           None,        None),
             ('errorbackground',   'pink',      None),
@@ -32,7 +33,7 @@ class EntryField(Pmw.MegaWidget):
         self.defineoptions(kw, optiondefs)
 
         # Initialise the base class (after defining the options).
-        Pmw.MegaWidget.__init__(self, parent)
+        pmw2.base.MegaWidget.__init__(self, parent)
 
         # Create the components.
         interior = self.interior()
@@ -91,7 +92,7 @@ class EntryField(Pmw.MegaWidget):
 
     def destroy(self):
         _deregisterEntryField(self._entryFieldEntry)
-        Pmw.MegaWidget.destroy(self)
+        pmw2.base.MegaWidget.destroy(self)
 
     def _getValidatorFunc(self, validator, index):
         # Search the extra and standard validator lists for the
@@ -328,7 +329,7 @@ class EntryField(Pmw.MegaWidget):
     def setvalue(self, text):
         return self.setentry(text)
 
-Pmw.forwardmethods(EntryField, Tkinter.Entry, '_entryFieldEntry')
+pmw2.base.forwardmethods(EntryField, Tkinter.Entry, '_entryFieldEntry')
 
 # ======================================================================
 
@@ -403,7 +404,7 @@ def realvalidator(text, separator = '.'):
     
 def timevalidator(text, separator = ':'):
     try:
-        Pmw.timestringtoseconds(text, separator)
+        pmw2.time_funcs.timestringtoseconds(text, separator)
         return OK
     except ValueError:
         if len(text) > 0 and text[0] in ('+', '-'):
@@ -414,7 +415,7 @@ def timevalidator(text, separator = ':'):
 
 def datevalidator(text, format = 'ymd', separator = '/'):
     try:
-        Pmw.datestringtojdn(text, format, separator)
+        pmw2.time_funcs.datestringtojdn(text, format, separator)
         return OK
     except ValueError:
         if re.search('[^0-9' + separator + ']', text) is not None:
@@ -425,11 +426,11 @@ _standardValidators = {
     'numeric'      : (numericvalidator,      int),
     'integer'      : (integervalidator,      int),
     'hexadecimal'  : (hexadecimalvalidator,  lambda s: int(s, 16)),
-    'real'         : (realvalidator,         Pmw.stringtoreal),
+    'real'         : (realvalidator,         pmw2.time_funcs.stringtoreal),
     'alphabetic'   : (alphabeticvalidator,   len),
     'alphanumeric' : (alphanumericvalidator, len),
-    'time'         : (timevalidator,         Pmw.timestringtoseconds),
-    'date'         : (datevalidator,         Pmw.datestringtojdn),
+    'time'         : (timevalidator,         pmw2.time_funcs.timestringtoseconds),
+    'date'         : (datevalidator,         pmw2.time_funcs.datestringtojdn),
 }
 
 _entryCache = {}

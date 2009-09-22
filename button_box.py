@@ -2,13 +2,13 @@
 
 import types
 import Tkinter
-import Pmw
+import pmw2.base
 
-class ButtonBox(Pmw.MegaWidget):
+class ButtonBox(pmw2.base.MegaWidget):
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('labelmargin',       0,              INITOPT),
             ('labelpos',          None,           INITOPT),
@@ -19,7 +19,7 @@ class ButtonBox(Pmw.MegaWidget):
         self.defineoptions(kw, optiondefs, dynamicGroups = ('Button',))
 
         # Initialise the base class (after defining the options).
-        Pmw.MegaWidget.__init__(self, parent)
+        pmw2.base.MegaWidget.__init__(self, parent)
 
         # Create the components.
         interior = self.interior()
@@ -63,7 +63,7 @@ class ButtonBox(Pmw.MegaWidget):
         if self._timerId:
             self.after_cancel(self._timerId)
             self._timerId = None
-        Pmw.MegaWidget.destroy(self)
+        pmw2.base.MegaWidget.destroy(self)
 
     def numbuttons(self):
         return len(self._buttonList)
@@ -77,14 +77,14 @@ class ButtonBox(Pmw.MegaWidget):
                 return index
             else:
                 raise ValueError, 'index "%s" is out of range' % index
-        elif index is Pmw.END:
+        elif index is pmw2.base.END:
             if forInsert:
                 return listLength
             elif listLength > 0:
                 return listLength - 1
             else:
                 raise ValueError, 'ButtonBox has no buttons'
-        elif index is Pmw.DEFAULT:
+        elif index is pmw2.base.DEFAULT:
             if self._defaultButton is not None:
                 return self._defaultButton
             raise ValueError, 'ButtonBox has no default'
@@ -92,7 +92,7 @@ class ButtonBox(Pmw.MegaWidget):
             names = map(lambda t: t[0], self._buttonList)
             if index in names:
                 return names.index(index)
-            validValues = 'a name, a number, Pmw.END or Pmw.DEFAULT'
+            validValues = 'a name, a number, pmw2.base.END or pmw2.base.DEFAULT'
             raise ValueError, \
                 'bad index "%s": must be %s' % (index, validValues)
 
@@ -177,7 +177,7 @@ class ButtonBox(Pmw.MegaWidget):
             button = self._buttonList[index][1]
             button.configure(default = 'active')
 
-    def invoke(self, index = Pmw.DEFAULT, noFlash = 0):
+    def invoke(self, index = pmw2.base.DEFAULT, noFlash = 0):
         # Invoke the callback associated with the *index* button.  If
         # *noFlash* is not set, flash the button to indicate to the
         # user that something happened.

@@ -1,14 +1,15 @@
 
 import types
 import Tkinter
-import Pmw
+import pmw2.base
+import pmw2.color
 
-class NoteBook(Pmw.MegaArchetype):
+class NoteBook(pmw2.base.MegaArchetype):
 
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('hull_highlightthickness',  0,           None),
             ('hull_borderwidth',         0,           None),
@@ -23,7 +24,7 @@ class NoteBook(Pmw.MegaArchetype):
         self.defineoptions(kw, optiondefs, dynamicGroups = ('Page', 'Tab'))
 
         # Initialise the base class (after defining the options).
-        Pmw.MegaArchetype.__init__(self, parent, Tkinter.Canvas)
+        pmw2.base.MegaArchetype.__init__(self, parent, Tkinter.Canvas)
 
         self.bind('<Map>', self._handleMap)
         self.bind('<Configure>', self._handleConfigure)
@@ -58,7 +59,7 @@ class NoteBook(Pmw.MegaArchetype):
             self.tabBottom = 0
 
         self._lightBorderColor, self._darkBorderColor = \
-                Pmw.Color.bordercolors(self, self['hull_background'])
+                pmw2.color.Color.bordercolors(self, self['hull_background'])
 
         self._pageNames   = []        # List of page names
 
@@ -271,21 +272,21 @@ class NoteBook(Pmw.MegaArchetype):
                 return index
             else:
                 raise ValueError, 'index "%s" is out of range' % index
-        elif index is Pmw.END:
+        elif index is pmw2.base.END:
             if forInsert:
                 return listLength
             elif listLength > 0:
                 return listLength - 1
             else:
                 raise ValueError, 'NoteBook has no pages'
-        elif index is Pmw.SELECT:
+        elif index is pmw2.base.SELECT:
             if listLength == 0:
                 raise ValueError, 'NoteBook has no pages'
             return self._pageNames.index(self.getcurselection())
         else:
             if index in self._pageNames:
                 return self._pageNames.index(index)
-            validValues = 'a name, a number, Pmw.END or Pmw.SELECT'
+            validValues = 'a name, a number, pmw2.base.END or pmw2.base.SELECT'
             raise ValueError, \
                 'bad index "%s": must be %s' % (index, validValues)
 
@@ -309,7 +310,7 @@ class NoteBook(Pmw.MegaArchetype):
 
     def previouspage(self, pageIndex = None):
         if pageIndex is None:
-            curpage = self.index(Pmw.SELECT)
+            curpage = self.index(pmw2.base.SELECT)
         else:
             curpage = self.index(pageIndex)
         if curpage > 0:
@@ -317,7 +318,7 @@ class NoteBook(Pmw.MegaArchetype):
 
     def nextpage(self, pageIndex = None):
         if pageIndex is None:
-            curpage = self.index(Pmw.SELECT)
+            curpage = self.index(pmw2.base.SELECT)
         else:
             curpage = self.index(pageIndex)
         if curpage < len(self._pageNames) - 1:
@@ -421,7 +422,7 @@ class NoteBook(Pmw.MegaArchetype):
 
         if 'borderColor' in self._pending:
             self._lightBorderColor, self._darkBorderColor = \
-                    Pmw.Color.bordercolors(self, self['hull_background'])
+                    pmw2.color.Color.bordercolors(self, self['hull_background'])
 
         # Draw all the tabs.
         if self._withTabs and ('tabs' in self._pending or
@@ -614,4 +615,4 @@ class NoteBook(Pmw.MegaArchetype):
 # Need to do forwarding to get the pack, grid, etc methods. 
 # Unfortunately this means that all the other canvas methods are also
 # forwarded.
-Pmw.forwardmethods(NoteBook, Tkinter.Canvas, '_hull')
+pmw2.base.forwardmethods(NoteBook, Tkinter.Canvas, '_hull')

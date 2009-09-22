@@ -1,11 +1,11 @@
 import Tkinter
-import Pmw
+import pmw2.base
 
-class ScrolledCanvas(Pmw.MegaWidget):
+class ScrolledCanvas(pmw2.base.MegaWidget):
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('borderframe',    0,            INITOPT),
             ('canvasmargin',   0,            INITOPT),
@@ -19,10 +19,10 @@ class ScrolledCanvas(Pmw.MegaWidget):
         self.defineoptions(kw, optiondefs)
 
         # Initialise the base class (after defining the options).
-        Pmw.MegaWidget.__init__(self, parent)
+        pmw2.base.MegaWidget.__init__(self, parent)
 
         # Create the components.
-        self.origInterior = Pmw.MegaWidget.interior(self)
+        self.origInterior = pmw2.base.MegaWidget.interior(self)
 
         if self['usehullsize']:
             self.origInterior.grid_propagate(0)
@@ -95,7 +95,7 @@ class ScrolledCanvas(Pmw.MegaWidget):
         if self.setregionTimer is not None:
             self.after_cancel(self.setregionTimer)
             self.setregionTimer = None
-        Pmw.MegaWidget.destroy(self)
+        pmw2.base.MegaWidget.destroy(self)
 
     # ======================================================================
 
@@ -286,4 +286,4 @@ class ScrolledCanvas(Pmw.MegaWidget):
     def bbox(self, *args):
         return self._canvas.bbox(*args)
 
-Pmw.forwardmethods(ScrolledCanvas, Tkinter.Canvas, '_canvas')
+pmw2.base.forwardmethods(ScrolledCanvas, Tkinter.Canvas, '_canvas')

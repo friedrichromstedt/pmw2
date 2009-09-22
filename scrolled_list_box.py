@@ -2,15 +2,15 @@
 
 import types
 import Tkinter
-import Pmw
+import pm2.base
 
-class ScrolledListBox(Pmw.MegaWidget):
+class ScrolledListBox(pmw2.base.MegaWidget):
     _classBindingsDefinedFor = 0
 
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('dblclickcommand',    None,            None),
             ('hscrollmode',        'dynamic',       self._hscrollMode),
@@ -25,7 +25,7 @@ class ScrolledListBox(Pmw.MegaWidget):
         self.defineoptions(kw, optiondefs)
 
         # Initialise the base class (after defining the options).
-        Pmw.MegaWidget.__init__(self, parent)
+        pmw2.base.MegaWidget.__init__(self, parent)
 
         # Create the components.
         interior = self.interior()
@@ -112,7 +112,7 @@ class ScrolledListBox(Pmw.MegaWidget):
             self.after_cancel(self.scrollTimer)
             self.scrollTimer = None
         _deregisterScrolledList(self._listbox)
-        Pmw.MegaWidget.destroy(self)
+        pmw2.base.MegaWidget.destroy(self)
 
     # ======================================================================
 
@@ -353,7 +353,7 @@ class ScrolledListBox(Pmw.MegaWidget):
     def bbox(self, index):
         return self._listbox.bbox(index)
 
-Pmw.forwardmethods(ScrolledListBox, Tkinter.Listbox, '_listbox')
+pmw2.base.forwardmethods(ScrolledListBox, Tkinter.Listbox, '_listbox')
 
 # ======================================================================
 

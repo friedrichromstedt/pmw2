@@ -1,11 +1,13 @@
 # A Dialog with a ScrolledText widget.
 
-import Pmw
+import pmw2.base
+import pmw2.dialog
+import pmw2.scrolled_text
 
-class TextDialog(Pmw.Dialog):
+class TextDialog(pmw2.dialog.Dialog):
     def __init__(self, parent = None, **kw):
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('borderx',     10,    INITOPT),
             ('bordery',     10,    INITOPT),
@@ -13,7 +15,7 @@ class TextDialog(Pmw.Dialog):
         self.defineoptions(kw, optiondefs)
 
         # Initialise the base class (after defining the options).
-        Pmw.Dialog.__init__(self, parent)
+        pmw2.dialog.Dialog.__init__(self, parent)
 
         # Create the components.
         interior = self.interior()
@@ -23,7 +25,7 @@ class TextDialog(Pmw.Dialog):
         )
         self._text = self.createcomponent('scrolledtext',
                 aliases, None,
-                Pmw.ScrolledText, (interior,))
+                pmw2.scrolled_text.ScrolledText, (interior,))
         self._text.pack(side='top', expand=1, fill='both',
                 padx = self['borderx'], pady = self['bordery'])
 
@@ -35,4 +37,4 @@ class TextDialog(Pmw.Dialog):
     def bbox(self, index):
         return self._text.bbox(index)
 
-Pmw.forwardmethods(TextDialog, Pmw.ScrolledText, '_text')
+pmw2.base.forwardmethods(TextDialog, pmw2.scrolled_text.ScrolledText, '_text')

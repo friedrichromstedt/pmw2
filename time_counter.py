@@ -3,9 +3,11 @@
 import sys
 import time
 import Tkinter
-import Pmw
+import pmw2.base
+import pmw2.entry_field
+import pmw2.time_funcs
 
-class TimeCounter(Pmw.MegaWidget):
+class TimeCounter(pmw2.base.MegaWidget):
     """Up-down counter
 
     A TimeCounter is a single-line entry widget with Up and Down arrows
@@ -15,7 +17,7 @@ class TimeCounter(Pmw.MegaWidget):
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('autorepeat',    1,    None),
             ('buttonaspect',  1.0,  INITOPT),
@@ -33,7 +35,7 @@ class TimeCounter(Pmw.MegaWidget):
         self.defineoptions(kw, optiondefs)
 
         # Initialise the base class (after defining the options).
-        Pmw.MegaWidget.__init__(self, parent)
+        pmw2.base.MegaWidget.__init__(self, parent)
 
         self.arrowDirection = {}
         self._flag = 'stopped'
@@ -105,19 +107,19 @@ class TimeCounter(Pmw.MegaWidget):
         # Create the hour entry field.
         self._hourCounterEntry = self.createcomponent('hourentryfield',
                 (('hourentry', 'hourentryfield_entry'),), None,
-                Pmw.EntryField, (frame,), validate='integer', entry_width = 2)
+                pmw.entry_field.EntryField, (frame,), validate='integer', entry_width = 2)
         self._hourCounterEntry.grid(column = 0, row = 1, sticky = 'news')
 
         # Create the minute entry field.
         self._minuteCounterEntry = self.createcomponent('minuteentryfield',
                 (('minuteentry', 'minuteentryfield_entry'),), None,
-                Pmw.EntryField, (frame,), validate='integer', entry_width = 2)
+                pmw2.entry_field.EntryField, (frame,), validate='integer', entry_width = 2)
         self._minuteCounterEntry.grid(column = 1, row = 1, sticky = 'news')
 
         # Create the second entry field.
         self._secondCounterEntry = self.createcomponent('secondentryfield',
                 (('secondentry', 'secondentryfield_entry'),), None,
-                Pmw.EntryField, (frame,), validate='integer', entry_width = 2)
+                pmw2.entry_field.EntryField, (frame,), validate='integer', entry_width = 2)
         self._secondCounterEntry.grid(column = 2, row = 1, sticky = 'news')
 
         # Create the up arrow buttons.
@@ -251,7 +253,7 @@ class TimeCounter(Pmw.MegaWidget):
         self._secondCounterEntry.bind('<Configure>', self._resizeArrow)
 
     def _drawArrow(self, arrow, direction):
-        Pmw.drawarrow(arrow, self['hourentry_foreground'], direction, 'arrow')
+        pmw2.base.drawarrow(arrow, self['hourentry_foreground'], direction, 'arrow')
 
     def _resizeArrow(self, event = None):
         for btn in (self._upHourArrowBtn, self._upMinuteArrowBtn,
@@ -270,14 +272,14 @@ class TimeCounter(Pmw.MegaWidget):
         if min is None:
             self._minVal = 0
         else:
-            self._minVal = Pmw.timestringtoseconds(min)
+            self._minVal = pmw2.time_funcs.timestringtoseconds(min)
 
     def _max(self):
         max = self['max']
         if max is None:
             self._maxVal = None
         else:
-            self._maxVal = Pmw.timestringtoseconds(max)
+            self._maxVal = pmw2.time_funcs.timestringtoseconds(max)
 
     def getvalue(self):
         return self.getstring()
@@ -377,4 +379,4 @@ class TimeCounter(Pmw.MegaWidget):
         if self._timerId is not None:
             self.after_cancel(self._timerId)
             self._timerId = None
-        Pmw.MegaWidget.destroy(self)
+        pmw2.base.MegaWidget.destroy(self)

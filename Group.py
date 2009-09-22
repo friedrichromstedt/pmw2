@@ -1,6 +1,6 @@
 
 import Tkinter
-import Pmw
+import pmw2.base
 
 def aligngrouptags(groups):
     # Adjust the y position of the tags in /groups/ so that they all
@@ -26,11 +26,11 @@ def aligngrouptags(groups):
         if group._tag is not None:
             group._tag.place(y = maxTagHeight / 2)
 
-class Group( Pmw.MegaWidget ):
+class Group(pmw2.base.MegaWidget):
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('collapsedsize',    6,         INITOPT),
             ('ring_borderwidth', 2,         None),
@@ -40,10 +40,10 @@ class Group( Pmw.MegaWidget ):
         self.defineoptions(kw, optiondefs)
 
         # Initialise the base class (after defining the options).
-        Pmw.MegaWidget.__init__(self, parent)
+        pmw2.base.MegaWidget.__init__(self, parent)
 
         # Create the components.
-        interior = Pmw.MegaWidget.interior(self)
+        interior = pmw2.base.MegaWidget.interior(self)
 
         self._ring = self.createcomponent(
             'ring', 

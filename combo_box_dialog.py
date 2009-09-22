@@ -1,8 +1,9 @@
 # Not Based on iwidgets version.
 
-import Pmw
+import pmw2.base
+import pmw2.dialog
 
-class ComboBoxDialog(Pmw.Dialog):
+class ComboBoxDialog(pmw2.dialog.Dialog):
     # Dialog window with simple combobox.
     
     # Dialog window displaying a list and entry field and requesting
@@ -10,7 +11,7 @@ class ComboBoxDialog(Pmw.Dialog):
 
     def __init__(self, parent = None, **kw):
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('borderx',    10,              INITOPT),
             ('bordery',    10,              INITOPT),
@@ -18,7 +19,7 @@ class ComboBoxDialog(Pmw.Dialog):
         self.defineoptions(kw, optiondefs)
 
         # Initialise the base class (after defining the options).
-        Pmw.Dialog.__init__(self, parent)
+        pmw2.dialog.Dialog.__init__(self, parent)
 
         # Create the components.
         interior = self.interior()
@@ -31,7 +32,7 @@ class ComboBoxDialog(Pmw.Dialog):
         )
         self._combobox = self.createcomponent('combobox',
                 aliases, None,
-                Pmw.ComboBox, (interior,),
+                pmw2.combo_box.ComboBox, (interior,),
                 scrolledlist_dblclickcommand = self.invoke,
                 dropdown = 0,
         )
@@ -57,4 +58,4 @@ class ComboBoxDialog(Pmw.Dialog):
     def bbox(self, index):
         return self._combobox.bbox(index)
 
-Pmw.forwardmethods(ComboBoxDialog, Pmw.ComboBox, '_combobox')
+pmw2.base.forwardmethods(ComboBoxDialog, Pmw.ComboBox, '_combobox')

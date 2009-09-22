@@ -2,14 +2,14 @@
 
 import types
 import Tkinter
-import Pmw
+import pmw2.base
 
-class MenuBar(Pmw.MegaWidget):
+class MenuBar(pmw2.base.MegaWidget):
 
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('balloon',      None,       None),
             ('hotkeys',      1,          INITOPT),
@@ -18,7 +18,7 @@ class MenuBar(Pmw.MegaWidget):
         self.defineoptions(kw, optiondefs, dynamicGroups = ('Menu', 'Button'))
 
         # Initialise the base class (after defining the options).
-        Pmw.MegaWidget.__init__(self, parent)
+        pmw2.base.MegaWidget.__init__(self, parent)
 
         self._menuInfo = {}
         # Map from a menu name to a tuple of information about the menu.

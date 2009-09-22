@@ -1,13 +1,13 @@
 # Based on iwidgets2.2.0/messagedialog.itk code.
 
 import Tkinter
-import Pmw
+import pmw2.dialog
 
-class MessageDialog(Pmw.Dialog):
+class MessageDialog(pmw2.dialog.Dialog):
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('borderx',       20,    INITOPT),
             ('bordery',       20,    INITOPT),
@@ -17,7 +17,7 @@ class MessageDialog(Pmw.Dialog):
         self.defineoptions(kw, optiondefs)
 
         # Initialise the base class (after defining the options).
-        Pmw.Dialog.__init__(self, parent)
+        pmw2.dialog.Dialog.__init__(self, parent)
 
         # Create the components.
         interior = self.interior()

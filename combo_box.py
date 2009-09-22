@@ -3,13 +3,15 @@
 import os
 import types
 import Tkinter
-import Pmw
+import pmw2.base
+import pmw2.entry_field
+import pmw2.scrolled_list_box
 
-class ComboBox(Pmw.MegaWidget):
+class ComboBox(pmw2.base.MegaWidget):
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('autoclear',          0,          INITOPT),
             ('buttonaspect',       1.0,        INITOPT),
@@ -26,14 +28,14 @@ class ComboBox(Pmw.MegaWidget):
         self.defineoptions(kw, optiondefs)
 
         # Initialise the base class (after defining the options).
-        Pmw.MegaWidget.__init__(self, parent)
+        pmw2.base.MegaWidget.__init__(self, parent)
 
         # Create the components.
         interior = self.interior()
 
         self._entryfield = self.createcomponent('entryfield',
             (('entry', 'entryfield_entry'),), None,
-            Pmw.EntryField, (interior,))
+            pmw2.entry_field.EntryField, (interior,))
         self._entryfield.grid(column=2, row=2, sticky=self['sticky'])
         interior.grid_columnconfigure(2, weight = 1)
         self._entryWidget = self._entryfield.component('entry')
@@ -70,7 +72,7 @@ class ComboBox(Pmw.MegaWidget):
             # Create the scrolled listbox inside the dropdown window.
             self._list = self.createcomponent('scrolledlist',
                 (('listbox', 'scrolledlist_listbox'),), None,
-                Pmw.ScrolledListBox, (self._popup,),
+                pmw.scrolled_list_box.ScrolledListBox, (self._popup,),
                 hull_borderwidth = 2,
                 hull_relief = 'raised',
                 hull_height = self['listheight'],
@@ -120,7 +122,7 @@ class ComboBox(Pmw.MegaWidget):
             # Create the scrolled listbox below the entry field.
             self._list = self.createcomponent('scrolledlist',
                 (('listbox', 'scrolledlist_listbox'),), None,
-                Pmw.ScrolledListBox, (interior,),
+                pmw.scrolled_list_box.ScrolledListBox, (interior,),
                 selectioncommand = self._selectCmd)
             self._list.grid(column=2, row=3, sticky='nsew')
             self.__listbox = self._list.component('listbox')
@@ -146,8 +148,8 @@ class ComboBox(Pmw.MegaWidget):
 
     def destroy(self):
         if self['dropdown'] and self._isPosted:
-            Pmw.popgrab(self._popup)
-        Pmw.MegaWidget.destroy(self)
+            pmw.base.popgrab(self._popup)
+        pmw.base.MegaWidget.destroy(self)
 
     #======================================================================
 
@@ -292,7 +294,7 @@ class ComboBox(Pmw.MegaWidget):
             direction = 'up'
         else:
             direction = 'down'
-        Pmw.drawarrow(arrow, self['entry_foreground'], direction, 'arrow')
+        pmw2.base.drawarrow(arrow, self['entry_foreground'], direction, 'arrow')
 
     def _postList(self, event = None):
         self._isPosted = 1
@@ -313,12 +315,12 @@ class ComboBox(Pmw.MegaWidget):
 
         self._list.configure(hull_width=w)
 
-        Pmw.setgeometryanddeiconify(self._popup, '+%d+%d' % (x, y))
+        pmw2.base.setgeometryanddeiconify(self._popup, '+%d+%d' % (x, y))
 
         # Grab the popup, so that all events are delivered to it, and
         # set focus to the listbox, to make keyboard navigation
         # easier.
-        Pmw.pushgrab(self._popup, 1, self._unpostList)
+        pmw2.base.pushgrab(self._popup, 1, self._unpostList)
         self.__listbox.focus_set()
 
         self._drawArrow()
@@ -359,7 +361,7 @@ class ComboBox(Pmw.MegaWidget):
             # example, by repeatedly pressing the space key to post
             # and unpost the popup.  The <space> event may be
             # delivered to the popup window even though
-            # Pmw.popgrab() has set the focus away from the
+            # pmw.base.popgrab() has set the focus away from the
             # popup window.  (Bug in Tk?)
             return
 
@@ -367,7 +369,7 @@ class ComboBox(Pmw.MegaWidget):
         # otherwise the window manager may take the focus away so we
         # can't redirect it.  Also, return the grab to the next active
         # window in the stack, if any.
-        Pmw.popgrab(self._popup)
+        pmw.base.popgrab(self._popup)
         self._popup.withdraw()
 
         self._isPosted = 0
@@ -377,5 +379,5 @@ class ComboBox(Pmw.MegaWidget):
         self._unpostList()
         self._selectCmd()
 
-Pmw.forwardmethods(ComboBox, Pmw.ScrolledListBox, '_list')
-Pmw.forwardmethods(ComboBox, Pmw.EntryField, '_entryfield')
+pmw2.base.forwardmethods(ComboBox, pmw.scrolled_list_box.ScrolledListBox, '_list')
+pmw2.base.forwardmethods(ComboBox, pmw.entry_field.EntryField, '_entryfield')

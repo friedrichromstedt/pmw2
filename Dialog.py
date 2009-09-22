@@ -9,15 +9,16 @@
 import sys
 import types
 import Tkinter
-import Pmw
+import pmw2.base
+import pmw2.button_box
 
 # A Toplevel with a ButtonBox and child site.
 
-class Dialog(Pmw.MegaToplevel):
+class Dialog(pmw2.base.MegaToplevel):
     def __init__(self, parent = None, **kw):
 
         # Define the megawidget options.
-        INITOPT = Pmw.INITOPT
+        INITOPT = pmw2.base.INITOPT
         optiondefs = (
             ('buttonbox_hull_borderwidth',   1,         None),
             ('buttonbox_hull_relief',        'raised',  None),
@@ -33,11 +34,11 @@ class Dialog(Pmw.MegaToplevel):
         self.defineoptions(kw, optiondefs)
 
         # Initialise the base class (after defining the options).
-        Pmw.MegaToplevel.__init__(self, parent)
+        pmw2.base.MegaToplevel.__init__(self, parent)
 
         # Create the components.
 
-        oldInterior = Pmw.MegaToplevel.interior(self)
+        oldInterior = pmw2.base.MegaToplevel.interior(self)
 
         # Set up pack options according to the position of the button box.
         pos = self['buttonboxpos']
@@ -64,7 +65,7 @@ class Dialog(Pmw.MegaToplevel):
         # Create the button box.
         self._buttonBox = self.createcomponent('buttonbox',
                 (), None,
-                Pmw.ButtonBox, (oldInterior,), orient = orient)
+                pmw2.button_box.ButtonBox, (oldInterior,), orient = orient)
         self._buttonBox.pack(side = side, fill = fill)
 
         # Create the separating line.
@@ -95,19 +96,19 @@ class Dialog(Pmw.MegaToplevel):
     def interior(self):
         return self.__dialogChildSite
 
-    def invoke(self, index = Pmw.DEFAULT):
+    def invoke(self, index = pmw2.base.DEFAULT):
         return self._buttonBox.invoke(index)
 
     def _invokeDefault(self, event):
         try:
-            self._buttonBox.index(Pmw.DEFAULT)
+            self._buttonBox.index(pmw2.base.DEFAULT)
         except ValueError:
             return
         self._buttonBox.invoke()
 
     def _doCommand(self, name = None):
         if name is not None and self.active() and \
-                Pmw.grabstacktopwindow() != self.component('hull'):
+                pmw2.base.grabstacktopwindow() != self.component('hull'):
             # This is a modal dialog but is not on the top of the grab
             # stack (ie:  should not have the grab), so ignore this
             # event.  This seems to be a bug in Tk and may occur in
