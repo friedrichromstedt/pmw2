@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # setup.py 
+
+# This file needs revision for Pmw2.
+
 from distutils.core import setup 
 
 
