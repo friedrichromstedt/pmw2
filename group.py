@@ -1,6 +1,6 @@
 
 import Tkinter
-import pmw2.base
+import pmw2
 
 def aligngrouptags(groups):
     # Adjust the y position of the tags in /groups/ so that they all

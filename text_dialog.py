@@ -1,8 +1,6 @@
 # A Dialog with a ScrolledText widget.
 
-import pmw2.base
-import pmw2.dialog
-import pmw2.scrolled_text
+import pmw2
 
 class TextDialog(pmw2.dialog.Dialog):
     def __init__(self, parent = None, **kw):

@@ -3,9 +3,7 @@
 import os
 import types
 import Tkinter
-import pmw2.base
-import pmw2.entry_field
-import pmw2.scrolled_list_box
+import pmw2
 
 class ComboBox(pmw2.base.MegaWidget):
     def __init__(self, parent = None, **kw):

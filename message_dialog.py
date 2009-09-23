@@ -1,7 +1,7 @@
 # Based on iwidgets2.2.0/messagedialog.itk code.
 
 import Tkinter
-import pmw2.dialog
+import pmw2
 
 class MessageDialog(pmw2.dialog.Dialog):
     def __init__(self, parent = None, **kw):

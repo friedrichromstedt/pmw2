@@ -2,7 +2,7 @@
 
 import types
 import Tkinter
-import pmw2.base
+import pmw2
 
 class MenuBar(pmw2.base.MegaWidget):
 

@@ -1,5 +1,5 @@
 import Tkinter
-import pmw2.base
+import pmw2
 
 class ScrolledField(pmw2.base.MegaWidget):
     def __init__(self, parent = None, **kw):

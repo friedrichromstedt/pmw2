@@ -1,7 +1,7 @@
 # Based on iwidgets2.2.0/promptdialog.itk code.
 
-import pmw2.dialog
-import pmw2.entry_field
+import pmw2
+import pmw2
 
 # A Dialog with an entryfield
 

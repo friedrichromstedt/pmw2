@@ -1,7 +1,7 @@
 import types
 import Tkinter
 import sys
-import pmw2.base
+import pmw2
 
 class OptionMenu(pmw2.base.MegaWidget):
 

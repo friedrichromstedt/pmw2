@@ -9,8 +9,7 @@
 import sys
 import types
 import Tkinter
-import pmw2.base
-import pmw2.button_box
+import pmw2
 
 # A Toplevel with a ButtonBox and child site.
 

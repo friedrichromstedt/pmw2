@@ -1,7 +1,7 @@
 # Based on iwidgets2.2.0/scrolledtext.itk code.   
 
 import Tkinter
-import pmw2.base
+import pmw2
 
 class ScrolledText(pmw2.base.MegaWidget):
     def __init__(self, parent = None, **kw):

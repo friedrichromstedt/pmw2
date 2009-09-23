@@ -1,7 +1,7 @@
 # Class to display messages in an information line.
 
 import Tkinter
-import pmw2.base
+import pmw2
 
 class MessageBar(pmw2.base.MegaWidget):
     def __init__(self, parent = None, **kw):

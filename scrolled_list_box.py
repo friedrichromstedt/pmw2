@@ -2,7 +2,7 @@
 
 import types
 import Tkinter
-import pm2.base
+import pmw2
 
 class ScrolledListBox(pmw2.base.MegaWidget):
     _classBindingsDefinedFor = 0

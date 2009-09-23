@@ -16,7 +16,7 @@
 # Developed since: Sep 2009
 # Version: 0.1.0b
 
-class Dynload:
+class Dynload(object):
 	"""The Dynload class emulates a module object, by implementing
 	__getattr__(), __setattr__() and __delattr__().  Thus the Dynload
 	instance behaves the same way as the emulated module, with the important
@@ -28,8 +28,10 @@ class Dynload:
 	def __init__(self, name):
 		"""NAME is the name of the module to be dynloaded."""
 
-		self.name = name
-		self.module = None
+		object.__setattr__(self, 'name', name)
+		object.__setattr__(self, 'module', None)
+
+		object.__setattr__(self, 'ready', True)  # value doesn't matter
 
 	
 	# Loading and reloading ...
@@ -45,7 +47,7 @@ class Dynload:
 			exec "import " + self.name
 
 			# Store the module object ...
-			self.module = eval(self.name)
+			object.__setattr__(self, 'module', eval(self.name))
 
 	def reload(self):
 		"""Reloads the underlying module.  The reload is implemented by

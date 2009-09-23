@@ -1,6 +1,4 @@
-import pmw2.base
-import pmw2.dialog
-import pmw2.counter
+import pmw2
 
 # A Dialog with a counter
 

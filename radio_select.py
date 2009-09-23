@@ -1,6 +1,6 @@
 import types
 import Tkinter
-import pmw2.base
+import pmw2
 
 class RadioSelect(pmw2.base.MegaWidget):
     # A collection of several buttons.  In single mode, only one

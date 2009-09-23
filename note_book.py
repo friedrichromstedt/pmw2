@@ -1,8 +1,7 @@
 
 import types
 import Tkinter
-import pmw2.base
-import pmw2.color
+import pmw2
 
 class NoteBook(pmw2.base.MegaArchetype):
 

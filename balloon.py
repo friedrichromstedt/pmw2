@@ -1,6 +1,6 @@
 import os
 import Tkinter
-import pmw2.base
+import pmw2
 
 class Balloon(pmw2.base.MegaToplevel):
     def __init__(self, parent = None, **kw):

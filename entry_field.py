@@ -3,8 +3,7 @@
 import re
 import types
 import Tkinter
-import pmw2.base
-import pmw2.time_funcs
+import pmw2
 
 # Possible return values of validation functions.
 OK = 1

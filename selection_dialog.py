@@ -1,8 +1,6 @@
 # Not Based on iwidgets version.
 
-import pmw2.base
-import pmw2.dialog
-import pmw2.scrolled_list_box
+import pmw2
 
 class SelectionDialog(pmw2.dialog.Dialog):
     # Dialog window with selection list.

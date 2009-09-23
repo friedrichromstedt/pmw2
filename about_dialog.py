@@ -1,4 +1,4 @@
-import pmw2.message_dialog
+import pmw2
 
 class AboutDialog(pmw2.message_dialog.MessageDialog):
     """Window to display version and contact information."""

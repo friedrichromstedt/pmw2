@@ -3,9 +3,7 @@
 import sys
 import time
 import Tkinter
-import pmw2.base
-import pmw2.entry_field
-import pmw2.time_funcs
+import pmw2
 
 class TimeCounter(pmw2.base.MegaWidget):
     """Up-down counter

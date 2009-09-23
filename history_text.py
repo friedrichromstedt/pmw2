@@ -1,4 +1,4 @@
-import pmw2.scrolled_text
+import pmw2
 
 _ORIGINAL = 0
 _MODIFIED = 1

@@ -1,7 +1,6 @@
 # Not Based on iwidgets version.
 
-import pmw2.base
-import pmw2.dialog
+import pmw2
 
 class ComboBoxDialog(pmw2.dialog.Dialog):
     # Dialog window with simple combobox.
