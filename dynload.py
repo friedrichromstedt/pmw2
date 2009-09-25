@@ -12,9 +12,9 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-# $Last changed: 2009 Sep 20$
+# $Last changed: 2009 Sep 25$
 # Developed since: Sep 2009
-# Version: 0.1.0b
+# Version: 0.2.0b
 
 class Dynload(object):
 	"""The Dynload class emulates a module object, by implementing
@@ -75,3 +75,49 @@ class Dynload(object):
 	def __delattr__(self, name):
 		self.load()
 		return delattr(self.module, name)
+
+class DynloadAttribute(object):
+	"""A DynloadAttribute emulates an attribute of a module by implmenting 
+	__call__(), __getattr__(), __setattr__() and __delattr__().  Thus the 
+	Dynload attribute behaves the same way as the emulated class, with the 
+	important exception, that the underlying module is imported only when 
+	the attribute is accessed first."""
+
+	def __init__(self, name, dynloadmodule = None):
+		"""NAME is the name of the class, DYNLOADMODULE is optional and can be
+		an Dynload instance to load the class from.  When DYNLOADMODULE is
+		given, the name is interpreted as relative to this module, otherwise
+		NAME is interpreted as the absolute class name."""
+
+		if dynloadmodule is not None:
+			object.__setattr__(self, 'module', dynloadmodule)
+			object.__setattr__(self, 'name', name)
+		else:
+			index = name.rfind('.')
+			if index == -1:
+				raise ValueError('Need a module attribut as NAME.')
+
+			modulename = name[:index]
+			attributename = name[index+1:]
+
+			dynloadmodule = Dynload(modulename)
+			object.__setattr__(self, 'module', dynloadmodule)
+			object.__setattr__(self, 'name', attributename)
+
+	# Calling ...
+
+	def __call__(self, *args, **kwargs):
+		attribute = getattr(self.module, self.name)
+		return attribute(*args, **kwargs)
+
+	def __getattr__(self, name):
+		attribute = getattr(self.module, self.name)
+		return getattr(attribute, name)
+
+	def __setattr__(self, name, value):
+		attribute = getattr(self.module, self.name)
+		return setattr(attribute, name, value)
+
+	def __delattr__(self, name):
+		attribute = getattr(self.module, self.name)
+		return delattr(attribute, name)

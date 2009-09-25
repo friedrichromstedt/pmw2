@@ -1458,8 +1458,8 @@ def initialise(
 
     # Set the base font size for the application and set the
     # Tk option database font resources.
-    import PmwLogicalFont
-    PmwLogicalFont._font_initialise(root, size, fontScheme)
+    import pmw2
+    pmw2.logical_font._font_initialise(root, size, fontScheme)
 
     return root
 
